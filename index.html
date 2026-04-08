@@ -1,109 +1,249 @@
 
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<title>Дневник тренировок</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{font-family:var(--font-sans);background:var(--color-background-tertiary);color:var(--color-text-primary)}
-.app{max-width:430px;margin:0 auto;min-height:100vh;background:var(--color-background-tertiary)}
-.header{background:var(--color-background-primary);border-bottom:0.5px solid var(--color-border-tertiary);padding:14px 16px;position:sticky;top:0;z-index:100}
-.header h1{font-size:17px;font-weight:500;text-align:center}
-.tabs{display:flex;background:var(--color-background-primary);border-bottom:0.5px solid var(--color-border-tertiary);position:sticky;top:49px;z-index:99}
-.tab{flex:1;padding:10px 0;font-size:13px;font-weight:500;text-align:center;cursor:pointer;border-bottom:2px solid transparent;color:var(--color-text-secondary);transition:all .2s}
-.tab.active{color:var(--color-text-primary);border-bottom-color:var(--color-text-primary)}
-.page{display:none;padding:12px}
+:root{
+  --fs-xs:11px;--fs-sm:13px;--fs-base:15px;--fs-md:17px;--fs-lg:20px;--fs-xl:24px;
+  --sp-xs:6px;--sp-sm:10px;--sp-md:14px;--sp-lg:18px;--sp-xl:24px;
+  --btn-h:44px;--input-h:44px;--icon-sz:40px;--card-r:12px;
+  --col-bg:#ffffff;--col-bg2:#f5f5f5;--col-bg3:#ebebeb;
+  --col-txt:#1a1a1a;--col-txt2:#666;--col-txt3:#999;
+  --col-brd:rgba(0,0,0,0.12);--col-brd2:rgba(0,0,0,0.2);
+  --col-green:#22c55e;--col-red:#ef4444;
+}
+@media(prefers-color-scheme:dark){:root{
+  --col-bg:#1c1c1e;--col-bg2:#2c2c2e;--col-bg3:#3a3a3c;
+  --col-txt:#f2f2f7;--col-txt2:#aeaeb2;--col-txt3:#636366;
+  --col-brd:rgba(255,255,255,0.12);--col-brd2:rgba(255,255,255,0.22);
+}}
+/* 320–767 mobile */
+@media(max-width:767px){:root{
+  --fs-xs:12px;--fs-sm:14px;--fs-base:16px;--fs-md:18px;--fs-lg:22px;--fs-xl:28px;
+  --sp-xs:8px;--sp-sm:12px;--sp-md:16px;--sp-lg:20px;--sp-xl:28px;
+  --btn-h:52px;--input-h:52px;--icon-sz:44px;--card-r:14px;
+}}
+/* 768–1199 tablet */
+@media(min-width:768px) and (max-width:1199px){:root{
+  --fs-xs:12px;--fs-sm:14px;--fs-base:16px;--fs-md:18px;--fs-lg:22px;--fs-xl:28px;
+  --sp-xs:8px;--sp-sm:12px;--sp-md:18px;--sp-lg:24px;--sp-xl:32px;
+  --btn-h:48px;--input-h:48px;--icon-sz:44px;--card-r:14px;
+}}
+/* 1200–1920 desktop */
+@media(min-width:1200px){:root{
+  --fs-xs:13px;--fs-sm:15px;--fs-base:17px;--fs-md:19px;--fs-lg:24px;--fs-xl:32px;
+  --sp-xs:8px;--sp-sm:12px;--sp-md:20px;--sp-lg:28px;--sp-xl:40px;
+  --btn-h:48px;--input-h:48px;--icon-sz:48px;--card-r:16px;
+}}
+
+html,body{min-height:100vh;background:var(--col-bg3);color:var(--col-txt);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:var(--fs-base);line-height:1.5}
+
+.layout{display:flex;flex-direction:column;min-height:100vh}
+@media(min-width:768px){.layout{flex-direction:row}}
+
+/* sidebar nav for tablet/desktop */
+.sidebar{display:none}
+@media(min-width:768px){
+  .sidebar{display:flex;flex-direction:column;width:220px;background:var(--col-bg);border-right:1px solid var(--col-brd);padding:var(--sp-xl) 0;flex-shrink:0;position:sticky;top:0;height:100vh}
+  .sidebar-logo{font-size:var(--fs-md);font-weight:600;padding:0 var(--sp-lg) var(--sp-xl);border-bottom:1px solid var(--col-brd);margin-bottom:var(--sp-md)}
+  .sidebar-nav{display:flex;flex-direction:column;gap:4px;padding:0 var(--sp-sm)}
+  .snav-item{display:flex;align-items:center;gap:10px;padding:12px var(--sp-md);border-radius:10px;cursor:pointer;font-size:var(--fs-base);font-weight:500;color:var(--col-txt2);transition:all .15s}
+  .snav-item:hover{background:var(--col-bg2);color:var(--col-txt)}
+  .snav-item.active{background:var(--col-bg2);color:var(--col-txt)}
+  .snav-icon{font-size:20px;width:28px;text-align:center}
+}
+@media(min-width:1200px){.sidebar{width:260px}}
+
+.main{flex:1;display:flex;flex-direction:column;min-width:0}
+
+/* mobile header */
+.mob-header{background:var(--col-bg);border-bottom:1px solid var(--col-brd);padding:0 var(--sp-md);display:flex;align-items:center;justify-content:center;height:52px;position:sticky;top:0;z-index:100}
+@media(min-width:768px){.mob-header{display:none}}
+.mob-header h1{font-size:var(--fs-md);font-weight:600}
+
+/* mobile bottom tabs */
+.mob-tabs{display:flex;background:var(--col-bg);border-top:1px solid var(--col-brd);position:sticky;bottom:0;z-index:100}
+@media(min-width:768px){.mob-tabs{display:none}}
+.mob-tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 0 12px;cursor:pointer;font-size:var(--fs-xs);font-weight:500;color:var(--col-txt3);gap:4px;transition:color .15s}
+.mob-tab.active{color:var(--col-green)}
+.mob-tab-icon{font-size:22px}
+
+/* content area */
+.content{flex:1;padding:var(--sp-md);overflow-y:auto}
+@media(min-width:768px){.content{padding:var(--sp-xl)}}
+@media(min-width:1200px){.content{max-width:900px}}
+@media(min-width:1200px){.main{align-items:flex-start}}
+@media(min-width:1200px){.content{width:100%}}
+
+.page{display:none}
 .page.active{display:block}
-.section-title{font-size:12px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.5px;margin:16px 0 8px;padding:0 2px}
-.card{background:var(--color-background-primary);border-radius:12px;border:0.5px solid var(--color-border-tertiary);margin-bottom:8px;overflow:hidden}
-.exercise-header{display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer}
-.ex-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+
+/* date strip */
+.date-strip{display:flex;gap:var(--sp-sm);overflow-x:auto;padding-bottom:var(--sp-xs);scrollbar-width:none;margin-bottom:var(--sp-md)}
+.date-strip::-webkit-scrollbar{display:none}
+.date-chip{flex-shrink:0;padding:8px 16px;border-radius:24px;font-size:var(--fs-sm);font-weight:500;cursor:pointer;border:1px solid var(--col-brd2);background:var(--col-bg);color:var(--col-txt2);white-space:nowrap;transition:all .15s;min-height:var(--btn-h);display:flex;align-items:center}
+.date-chip.active{background:var(--col-txt);color:var(--col-bg);border-color:transparent}
+
+/* workout title */
+.workout-title{margin-bottom:var(--sp-md)}
+.workout-title input{width:100%;font-size:var(--fs-md);font-weight:600;border:none;background:transparent;color:var(--col-txt);outline:none;padding:4px 0;border-bottom:2px solid var(--col-brd2)}
+.workout-title input:focus{border-bottom-color:var(--col-green)}
+
+/* section title */
+.sec-title{font-size:var(--fs-xs);font-weight:600;color:var(--col-txt3);text-transform:uppercase;letter-spacing:.6px;margin:var(--sp-lg) 0 var(--sp-sm);padding:0 2px}
+
+/* card */
+.card{background:var(--col-bg);border-radius:var(--card-r);border:1px solid var(--col-brd);margin-bottom:var(--sp-sm);overflow:hidden}
+
+/* exercise row */
+.ex-header{display:flex;align-items:center;gap:var(--sp-sm);padding:var(--sp-md);cursor:pointer;min-height:var(--btn-h)}
+.ex-icon{width:var(--icon-sz);height:var(--icon-sz);border-radius:10px;background:var(--col-bg2);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+@media(max-width:767px){.ex-icon{font-size:26px}}
 .ex-info{flex:1;min-width:0}
-.ex-name{font-size:14px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ex-meta{font-size:12px;color:var(--color-text-secondary);margin-top:1px}
-.ex-check{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px;border:2px solid var(--color-border-secondary);color:var(--color-text-tertiary);transition:all .2s}
-.ex-check.done{background:#22c55e;border-color:#22c55e;color:#fff}
-.ex-body{border-top:0.5px solid var(--color-border-tertiary);padding:12px 14px;display:none}
+.ex-name{font-size:var(--fs-base);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ex-meta{font-size:var(--fs-sm);color:var(--col-txt2);margin-top:2px}
+.ex-check{width:var(--icon-sz);height:var(--icon-sz);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px;border:2px solid var(--col-brd2);color:var(--col-txt3);transition:all .2s}
+.ex-check.done{background:var(--col-green);border-color:var(--col-green);color:#fff;font-size:20px}
+
+/* exercise body */
+.ex-body{display:none;border-top:1px solid var(--col-brd);padding:var(--sp-md)}
 .ex-body.open{display:block}
-.row{display:flex;align-items:center;gap:8px;margin-bottom:10px}
-.label{font-size:12px;color:var(--color-text-secondary);width:80px;flex-shrink:0}
-.num-input{display:flex;align-items:center;gap:6px}
-.num-btn{width:30px;height:30px;border-radius:8px;border:0.5px solid var(--color-border-secondary);background:var(--color-background-secondary);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;color:var(--color-text-primary);font-weight:400;line-height:1;user-select:none}
-.num-btn:active{background:var(--color-background-tertiary)}
-.num-val{width:44px;text-align:center;font-size:16px;font-weight:500;border:0.5px solid var(--color-border-secondary);border-radius:8px;padding:4px 0;background:var(--color-background-secondary)}
-.done-row{display:flex;align-items:center;gap:8px}
-.done-input{width:64px;text-align:center;font-size:20px;font-weight:500;border:0.5px solid var(--color-border-secondary);border-radius:10px;padding:6px 0;background:var(--color-background-secondary);color:var(--color-text-primary)}
-.done-status{font-size:12px;padding:4px 10px;border-radius:20px;font-weight:500}
+
+.field-row{display:flex;align-items:center;gap:var(--sp-sm);margin-bottom:var(--sp-md)}
+.field-label{font-size:var(--fs-sm);font-weight:500;color:var(--col-txt2);width:90px;flex-shrink:0}
+@media(min-width:768px){.field-label{width:110px}}
+
+.num-ctrl{display:flex;align-items:center;gap:var(--sp-xs)}
+.nbtn{width:var(--btn-h);height:var(--btn-h);border-radius:10px;border:1px solid var(--col-brd2);background:var(--col-bg2);cursor:pointer;font-size:22px;display:flex;align-items:center;justify-content:center;color:var(--col-txt);user-select:none;flex-shrink:0;transition:background .1s}
+.nbtn:active{background:var(--col-bg3)}
+.nval{min-width:56px;text-align:center;font-size:var(--fs-lg);font-weight:600;border:1px solid var(--col-brd2);border-radius:10px;padding:8px 4px;background:var(--col-bg2);color:var(--col-txt)}
+input.nval{-moz-appearance:textfield}
+input.nval::-webkit-inner-spin-button,input.nval::-webkit-outer-spin-button{-webkit-appearance:none}
+
+.status-badge{display:inline-flex;align-items:center;padding:6px 14px;border-radius:20px;font-size:var(--fs-sm);font-weight:600}
 .status-ok{background:#dcfce7;color:#15803d}
 .status-fail{background:#fee2e2;color:#b91c1c}
-.status-none{background:var(--color-background-secondary);color:var(--color-text-secondary)}
-.add-btn{width:100%;padding:12px;border-radius:10px;border:1.5px dashed var(--color-border-secondary);background:transparent;color:var(--color-text-secondary);font-size:14px;cursor:pointer;margin-top:4px}
-.add-btn:active{background:var(--color-background-secondary)}
-.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;align-items:flex-end;justify-content:center}
+.status-none{background:var(--col-bg2);color:var(--col-txt2)}
+
+.ex-footer{display:flex;align-items:center;justify-content:space-between;margin-top:var(--sp-sm)}
+.del-btn{font-size:var(--fs-sm);color:var(--col-txt3);cursor:pointer;padding:6px 0;min-height:44px;display:flex;align-items:center}
+.del-btn:active{color:var(--col-red)}
+
+/* add button */
+.add-btn{width:100%;padding:0 var(--sp-md);height:var(--btn-h);border-radius:var(--card-r);border:2px dashed var(--col-brd2);background:transparent;color:var(--col-txt2);font-size:var(--fs-base);font-weight:500;cursor:pointer;margin-top:var(--sp-xs);display:flex;align-items:center;justify-content:center;gap:8px;transition:all .15s}
+.add-btn:active{background:var(--col-bg2)}
+
+/* empty state */
+.empty{text-align:center;padding:48px 20px;color:var(--col-txt2)}
+.empty-icon{font-size:48px;margin-bottom:var(--sp-md)}
+.empty p{font-size:var(--fs-base)}
+
+/* summary bar */
+.summary-bar{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-sm);margin-bottom:var(--sp-lg)}
+.sum-card{background:var(--col-bg);border-radius:var(--card-r);border:1px solid var(--col-brd);padding:var(--sp-md);text-align:center}
+.sum-num{font-size:var(--fs-xl);font-weight:700;line-height:1.1}
+.sum-lbl{font-size:var(--fs-xs);color:var(--col-txt2);margin-top:4px}
+
+/* progress cards */
+.prog-card{background:var(--col-bg);border-radius:var(--card-r);border:1px solid var(--col-brd);padding:var(--sp-md);margin-bottom:var(--sp-sm)}
+@media(min-width:768px){
+  .prog-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--sp-md)}
+  .prog-grid .prog-card{margin-bottom:0}
+}
+@media(min-width:1200px){
+  .prog-grid{grid-template-columns:repeat(3,1fr)}
+}
+.prog-top{display:flex;align-items:center;gap:var(--sp-sm);margin-bottom:var(--sp-sm)}
+.prog-ico{font-size:24px;width:36px;flex-shrink:0}
+.prog-nm{font-size:var(--fs-base);font-weight:600;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prog-rec{font-size:var(--fs-xs);color:var(--col-txt3);white-space:nowrap}
+.prog-bar-bg{height:8px;border-radius:4px;background:var(--col-bg3);overflow:hidden;margin-bottom:var(--sp-xs)}
+.prog-bar{height:100%;border-radius:4px;background:var(--col-green);transition:width .4s}
+.prog-stats{display:flex;justify-content:space-between}
+.prog-stat{font-size:var(--fs-xs);color:var(--col-txt2)}
+.prog-stat strong{color:var(--col-txt);font-weight:600}
+
+/* modal */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:flex-end;justify-content:center}
+@media(min-width:768px){.modal-bg{align-items:center}}
 .modal-bg.open{display:flex}
-.modal{background:var(--color-background-primary);border-radius:20px 20px 0 0;width:100%;max-width:430px;padding:20px 16px 32px;max-height:80vh;overflow-y:auto}
-.modal h2{font-size:16px;font-weight:500;margin-bottom:16px;text-align:center}
-.ex-list{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.ex-pick{padding:12px 10px;border-radius:10px;border:0.5px solid var(--color-border-tertiary);background:var(--color-background-secondary);cursor:pointer;text-align:center;font-size:13px;font-weight:500}
-.ex-pick:active{background:var(--color-background-tertiary)}
-.ex-pick .pick-icon{font-size:22px;margin-bottom:4px}
-.close-btn{width:100%;padding:12px;border-radius:10px;border:0.5px solid var(--color-border-secondary);background:transparent;color:var(--color-text-primary);font-size:14px;cursor:pointer;margin-top:12px}
-.progress-card{background:var(--color-background-primary);border-radius:12px;border:0.5px solid var(--color-border-tertiary);margin-bottom:8px;padding:14px}
-.prog-header{display:flex;align-items:center;gap:10px;margin-bottom:10px}
-.prog-icon{font-size:20px}
-.prog-name{font-size:14px;font-weight:500;flex:1}
-.prog-best{font-size:12px;color:var(--color-text-secondary)}
-.prog-bar-bg{height:6px;border-radius:3px;background:var(--color-background-tertiary);overflow:hidden}
-.prog-bar{height:100%;border-radius:3px;background:#22c55e;transition:width .4s}
-.prog-stats{display:flex;justify-content:space-between;margin-top:6px}
-.prog-stat{font-size:11px;color:var(--color-text-secondary)}
-.prog-stat strong{color:var(--color-text-primary);font-weight:500}
-.date-strip{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;margin-bottom:12px}
-.date-strip::-webkit-scrollbar{display:none}
-.date-chip{flex-shrink:0;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-secondary)}
-.date-chip.active{background:var(--color-text-primary);color:var(--color-background-primary);border-color:transparent}
-.empty-state{text-align:center;padding:40px 20px;color:var(--color-text-secondary);font-size:14px}
-.empty-icon{font-size:40px;margin-bottom:12px}
-.summary-bar{display:flex;gap:8px;margin-bottom:12px}
-.sum-card{flex:1;background:var(--color-background-primary);border-radius:10px;border:0.5px solid var(--color-border-tertiary);padding:10px;text-align:center}
-.sum-num{font-size:22px;font-weight:500}
-.sum-lbl{font-size:11px;color:var(--color-text-secondary);margin-top:2px}
-.workout-title{display:flex;align-items:center;gap:8px;margin-bottom:12px}
-.workout-title input{flex:1;font-size:15px;font-weight:500;border:none;background:transparent;color:var(--color-text-primary);outline:none}
+.modal{background:var(--col-bg);border-radius:20px 20px 0 0;width:100%;max-width:520px;padding:var(--sp-xl) var(--sp-md) 36px;max-height:85vh;overflow-y:auto}
+@media(min-width:768px){.modal{border-radius:var(--card-r);max-height:80vh}}
+.modal-title{font-size:var(--fs-md);font-weight:700;text-align:center;margin-bottom:var(--sp-lg)}
+.ex-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--sp-sm)}
+@media(min-width:480px){.ex-grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:768px){.ex-grid{grid-template-columns:repeat(4,1fr)}}
+.ex-pick{padding:var(--sp-md) var(--sp-sm);border-radius:12px;border:1px solid var(--col-brd);background:var(--col-bg2);cursor:pointer;text-align:center;transition:all .15s;min-height:80px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}
+.ex-pick:active{background:var(--col-bg3);transform:scale(.97)}
+.ex-pick-icon{font-size:28px}
+.ex-pick-name{font-size:var(--fs-xs);font-weight:500;line-height:1.3}
+.modal-close{width:100%;height:var(--btn-h);border-radius:10px;border:1px solid var(--col-brd2);background:transparent;color:var(--col-txt);font-size:var(--fs-base);font-weight:500;cursor:pointer;margin-top:var(--sp-md)}
 </style>
-<div class="app">
-<div class="header"><h1>Дневник тренировок</h1></div>
-<div class="tabs">
-  <div class="tab active" onclick="switchTab('workout')">Тренировка</div>
-  <div class="tab" onclick="switchTab('dashboard')">Прогресс</div>
-</div>
 
-<div class="page active" id="page-workout">
-  <div class="date-strip" id="dateStrip"></div>
-  <div class="workout-title">
-    <input type="text" id="workoutTitle" placeholder="Название тренировки" maxlength="40">
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-logo">🏋️ Тренировки</div>
+    <nav class="sidebar-nav">
+      <div class="snav-item active" id="snav-workout" onclick="switchTab('workout',this)">
+        <span class="snav-icon">📋</span> Тренировка
+      </div>
+      <div class="snav-item" id="snav-dashboard" onclick="switchTab('dashboard',this)">
+        <span class="snav-icon">📊</span> Прогресс
+      </div>
+    </nav>
+  </aside>
+
+  <div class="main">
+    <div class="mob-header"><h1>Дневник тренировок</h1></div>
+
+    <div class="content">
+      <div class="page active" id="page-workout">
+        <div class="date-strip" id="dateStrip"></div>
+        <div class="workout-title">
+          <input type="text" id="workoutTitle" placeholder="Название тренировки" maxlength="50">
+        </div>
+        <div id="exerciseList"></div>
+        <button class="add-btn" onclick="openModal()">＋ Добавить упражнение</button>
+      </div>
+
+      <div class="page" id="page-dashboard">
+        <div class="summary-bar">
+          <div class="sum-card"><div class="sum-num" id="sumTotal">0</div><div class="sum-lbl">тренировок</div></div>
+          <div class="sum-card"><div class="sum-num" id="sumExTotal">0</div><div class="sum-lbl">упражнений</div></div>
+          <div class="sum-card"><div class="sum-num" id="sumReps">0</div><div class="sum-lbl">повторений</div></div>
+        </div>
+        <div class="sec-title">Прогресс по упражнениям</div>
+        <div class="prog-grid" id="progressList"></div>
+      </div>
+    </div>
+
+    <nav class="mob-tabs">
+      <div class="mob-tab active" id="mtab-workout" onclick="switchTab('workout',this)">
+        <span class="mob-tab-icon">📋</span>Тренировка
+      </div>
+      <div class="mob-tab" id="mtab-dashboard" onclick="switchTab('dashboard',this)">
+        <span class="mob-tab-icon">📊</span>Прогресс
+      </div>
+    </nav>
   </div>
-  <div id="exerciseList"></div>
-  <button class="add-btn" onclick="openModal()">+ Добавить упражнение</button>
 </div>
 
-<div class="page" id="page-dashboard">
-  <div class="summary-bar" id="summaryBar">
-    <div class="sum-card"><div class="sum-num" id="sumTotal">0</div><div class="sum-lbl">тренировок</div></div>
-    <div class="sum-card"><div class="sum-num" id="sumExTotal">0</div><div class="sum-lbl">упражнений</div></div>
-    <div class="sum-card"><div class="sum-num" id="sumReps">0</div><div class="sum-lbl">повторений</div></div>
+<div class="modal-bg" id="modal" onclick="bgClose(event)">
+  <div class="modal">
+    <div class="modal-title">Выбрать упражнение</div>
+    <div class="ex-grid" id="exPickList"></div>
+    <button class="modal-close" onclick="closeModal()">Закрыть</button>
   </div>
-  <div class="section-title">Прогресс по упражнениям</div>
-  <div id="progressList"></div>
-</div>
-</div>
-
-<div class="modal-bg" id="modal" onclick="closeModal(event)">
-<div class="modal">
-  <h2>Выбрать упражнение</h2>
-  <div class="ex-list" id="exPickList"></div>
-  <button class="close-btn" onclick="closeModalDirect()">Закрыть</button>
-</div>
 </div>
 
 <script>
-const EXERCISES=[
+const EX=[
   {id:'pushup',name:'Отжимания',icon:'🤜'},
   {id:'burpee',name:'Берпи',icon:'⚡'},
   {id:'squat',name:'Приседания',icon:'🦵'},
@@ -120,197 +260,153 @@ const EXERCISES=[
   {id:'kb_orbit',name:'Вращение гири вокруг корпуса',icon:'🔃'},
 ];
 
-let state={sessions:{},currentDate:todayStr(),};
-function todayStr(){let d=new Date();return d.toISOString().slice(0,10);}
-function load(){try{let s=localStorage.getItem('wkd2');if(s)state=JSON.parse(s);}catch(e){}}
-function save(){try{localStorage.setItem('wkd2',JSON.stringify(state));}catch(e){}}
-function getSession(date){if(!state.sessions[date])state.sessions[date]={title:'',exercises:[]};return state.sessions[date];}
-
+let S={sessions:{},cur:today()};
+function today(){return new Date().toISOString().slice(0,10)}
+function load(){try{let d=localStorage.getItem('wkd3');if(d)S=JSON.parse(d)}catch(e){}}
+function save(){try{localStorage.setItem('wkd3',JSON.stringify(S))}catch(e){}}
+function sess(d){if(!S.sessions[d])S.sessions[d]={title:'',exercises:[]};return S.sessions[d]}
 load();
 
 function renderDates(){
-  const strip=document.getElementById('dateStrip');
-  strip.innerHTML='';
-  const days=14;
-  for(let i=days-1;i>=0;i--){
+  const el=document.getElementById('dateStrip');
+  el.innerHTML='';
+  for(let i=13;i>=0;i--){
     let d=new Date();d.setDate(d.getDate()-i);
     let s=d.toISOString().slice(0,10);
-    let label=i===0?'Сегодня':i===1?'Вчера':d.toLocaleDateString('ru',{day:'numeric',month:'short'});
-    let chip=document.createElement('div');
-    chip.className='date-chip'+(s===state.currentDate?' active':'');
-    chip.textContent=label;
-    chip.onclick=()=>{state.currentDate=s;save();renderAll();};
-    strip.appendChild(chip);
+    let lbl=i===0?'Сегодня':i===1?'Вчера':d.toLocaleDateString('ru',{day:'numeric',month:'short'});
+    let c=document.createElement('div');
+    c.className='date-chip'+(s===S.cur?' active':'');
+    c.textContent=lbl;
+    c.onclick=()=>{S.cur=s;save();renderAll()};
+    el.appendChild(c);
   }
-  strip.scrollLeft=strip.scrollWidth;
+  el.scrollLeft=el.scrollWidth;
 }
 
 function renderWorkout(){
-  const sess=getSession(state.currentDate);
-  document.getElementById('workoutTitle').value=sess.title||'';
-  const list=document.getElementById('exerciseList');
-  list.innerHTML='';
-  if(sess.exercises.length===0){
-    list.innerHTML='<div class="empty-state"><div class="empty-icon">🏋️</div>Добавьте первое упражнение</div>';
+  const se=sess(S.cur);
+  document.getElementById('workoutTitle').value=se.title||'';
+  const el=document.getElementById('exerciseList');
+  el.innerHTML='';
+  if(!se.exercises.length){
+    el.innerHTML='<div class="empty"><div class="empty-icon">🏋️</div><p>Добавьте первое упражнение</p></div>';
     return;
   }
-  sess.exercises.forEach((ex,idx)=>{
-    const exDef=EXERCISES.find(e=>e.id===ex.id)||{name:ex.id,icon:'•'};
-    const target=ex.target||10;
-    const done=ex.done||0;
-    const checked=done>=target&&done>0;
+  se.exercises.forEach((ex,i)=>{
+    const def=EX.find(e=>e.id===ex.id)||{name:ex.id,icon:'•'};
+    const t=ex.target||10,d=ex.done||0,ok=d>=t&&d>0;
     const div=document.createElement('div');
     div.className='card';
     div.innerHTML=`
-      <div class="exercise-header" onclick="toggleEx(${idx})">
-        <div class="ex-icon" style="background:var(--color-background-secondary)">${exDef.icon}</div>
-        <div class="ex-info">
-          <div class="ex-name">${exDef.name}</div>
-          <div class="ex-meta">${done}/${target} повт.</div>
-        </div>
-        <div class="ex-check${checked?' done':''}">
-          ${checked?'✓':''}
-        </div>
-      </div>
-      <div class="ex-body${ex.open?' open':''}">
-        <div class="row">
-          <div class="label">Цель</div>
-          <div class="num-input">
-            <div class="num-btn" onclick="adj(${idx},'target',-1)">−</div>
-            <div class="num-val" id="tv${idx}">${target}</div>
-            <div class="num-btn" onclick="adj(${idx},'target',1)">+</div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="label">Выполнено</div>
-          <div class="done-row">
-            <div class="num-btn" onclick="adj(${idx},'done',-1)">−</div>
-            <input class="done-input" type="number" min="0" id="dv${idx}" value="${done}" oninput="setDone(${idx},this.value)" inputmode="numeric">
-            <div class="num-btn" onclick="adj(${idx},'done',1)">+</div>
-          </div>
-        </div>
-        <div style="display:flex;align-items:center;justify-content:space-between">
-          <span class="done-status ${done===0?'status-none':checked?'status-ok':'status-fail'}">${done===0?'Не начато':checked?'✓ Цель достигнута':'✗ Ниже цели'}</span>
-          <span style="font-size:12px;color:var(--color-text-secondary);cursor:pointer" onclick="removeEx(${idx})">Удалить</span>
-        </div>
-      </div>`;
-    list.appendChild(div);
+<div class="ex-header" onclick="toggle(${i})">
+  <div class="ex-icon">${def.icon}</div>
+  <div class="ex-info">
+    <div class="ex-name">${def.name}</div>
+    <div class="ex-meta">${d} / ${t} повт.</div>
+  </div>
+  <div class="ex-check${ok?' done':''}">${ok?'✓':''}</div>
+</div>
+<div class="ex-body${ex.open?' open':''}">
+  <div class="field-row">
+    <div class="field-label">Цель</div>
+    <div class="num-ctrl">
+      <div class="nbtn" onclick="adj(${i},'target',-1)">−</div>
+      <div class="nval" id="tv${i}">${t}</div>
+      <div class="nbtn" onclick="adj(${i},'target',1)">+</div>
+    </div>
+  </div>
+  <div class="field-row">
+    <div class="field-label">Выполнено</div>
+    <div class="num-ctrl">
+      <div class="nbtn" onclick="adj(${i},'done',-1)">−</div>
+      <input class="nval" type="number" inputmode="numeric" min="0" value="${d}" oninput="setDone(${i},this.value)" style="width:64px">
+      <div class="nbtn" onclick="adj(${i},'done',1)">+</div>
+    </div>
+  </div>
+  <div class="ex-footer">
+    <span class="status-badge ${d===0?'status-none':ok?'status-ok':'status-fail'}">${d===0?'Не начато':ok?'✓ Цель достигнута':'✗ Ниже цели'}</span>
+    <span class="del-btn" onclick="removeEx(${i})">Удалить</span>
+  </div>
+</div>`;
+    el.appendChild(div);
   });
 }
 
-function toggleEx(idx){
-  const sess=getSession(state.currentDate);
-  sess.exercises[idx].open=!sess.exercises[idx].open;
-  save();renderWorkout();
-}
-function adj(idx,field,delta){
-  const sess=getSession(state.currentDate);
-  let v=(sess.exercises[idx][field]||0)+delta;
-  if(v<0)v=0;
-  sess.exercises[idx][field]=v;
-  save();renderWorkout();
-}
-function setDone(idx,val){
-  const sess=getSession(state.currentDate);
-  sess.exercises[idx].done=parseInt(val)||0;
-  save();renderWorkout();
-}
-function removeEx(idx){
-  const sess=getSession(state.currentDate);
-  sess.exercises.splice(idx,1);
-  save();renderWorkout();
-}
+function toggle(i){const s=sess(S.cur);s.exercises[i].open=!s.exercises[i].open;save();renderWorkout()}
+function adj(i,f,d){const s=sess(S.cur);let v=(s.exercises[i][f]||0)+d;if(v<0)v=0;s.exercises[i][f]=v;save();renderWorkout()}
+function setDone(i,v){const s=sess(S.cur);s.exercises[i].done=parseInt(v)||0;save();renderWorkout()}
+function removeEx(i){const s=sess(S.cur);s.exercises.splice(i,1);save();renderWorkout()}
+document.getElementById('workoutTitle').oninput=function(){sess(S.cur).title=this.value;save()}
 
-document.getElementById('workoutTitle').oninput=function(){
-  getSession(state.currentDate).title=this.value;save();
-};
-
-function openModal(){document.getElementById('modal').classList.add('open');}
-function closeModalDirect(){document.getElementById('modal').classList.remove('open');}
-function closeModal(e){if(e.target===document.getElementById('modal'))closeModalDirect();}
+function openModal(){document.getElementById('modal').classList.add('open')}
+function closeModal(){document.getElementById('modal').classList.remove('open')}
+function bgClose(e){if(e.target===document.getElementById('modal'))closeModal()}
 
 function renderModal(){
-  const list=document.getElementById('exPickList');
-  list.innerHTML='';
-  EXERCISES.forEach(ex=>{
+  const el=document.getElementById('exPickList');
+  el.innerHTML='';
+  EX.forEach(ex=>{
     const d=document.createElement('div');
     d.className='ex-pick';
-    d.innerHTML=`<div class="pick-icon">${ex.icon}</div>${ex.name}`;
-    d.onclick=()=>addExercise(ex.id);
-    list.appendChild(d);
+    d.innerHTML=`<div class="ex-pick-icon">${ex.icon}</div><div class="ex-pick-name">${ex.name}</div>`;
+    d.onclick=()=>{sess(S.cur).exercises.push({id:ex.id,target:10,done:0,open:true});save();renderWorkout();closeModal()};
+    el.appendChild(d);
   });
-}
-
-function addExercise(id){
-  const sess=getSession(state.currentDate);
-  sess.exercises.push({id,target:10,done:0,open:true});
-  save();renderWorkout();closeModalDirect();
 }
 
 function renderDashboard(){
-  const allDates=Object.keys(state.sessions);
-  document.getElementById('sumTotal').textContent=allDates.length;
-  let totalEx=0,totalReps=0;
-  const exStats={};
-  allDates.forEach(date=>{
-    const sess=state.sessions[date];
-    totalEx+=sess.exercises.length;
-    sess.exercises.forEach(ex=>{
-      totalReps+=(ex.done||0);
-      if(!exStats[ex.id])exStats[ex.id]={name:EXERCISES.find(e=>e.id===ex.id)?.name||ex.id,icon:EXERCISES.find(e=>e.id===ex.id)?.icon||'•',sessions:[],best:0,last:0};
-      exStats[ex.id].sessions.push({date,done:ex.done||0,target:ex.target||10});
-      if((ex.done||0)>exStats[ex.id].best)exStats[ex.id].best=ex.done||0;
-      exStats[ex.id].last=ex.done||0;
+  const dates=Object.keys(S.sessions);
+  document.getElementById('sumTotal').textContent=dates.length;
+  let te=0,tr=0,stats={};
+  dates.forEach(date=>{
+    S.sessions[date].exercises.forEach(ex=>{
+      te++;tr+=ex.done||0;
+      if(!stats[ex.id]){const def=EX.find(e=>e.id===ex.id)||{name:ex.id,icon:'•'};stats[ex.id]={name:def.name,icon:def.icon,sessions:[],best:0}}
+      stats[ex.id].sessions.push({date,done:ex.done||0});
+      if((ex.done||0)>stats[ex.id].best)stats[ex.id].best=ex.done||0;
     });
   });
-  document.getElementById('sumExTotal').textContent=totalEx;
-  document.getElementById('sumReps').textContent=totalReps;
-
+  document.getElementById('sumExTotal').textContent=te;
+  document.getElementById('sumReps').textContent=tr;
   const pl=document.getElementById('progressList');
   pl.innerHTML='';
-  const keys=Object.keys(exStats);
-  if(keys.length===0){pl.innerHTML='<div class="empty-state"><div class="empty-icon">📊</div>Нет данных. Начните тренировку!</div>';return;}
+  const keys=Object.keys(stats);
+  if(!keys.length){pl.innerHTML='<div class="empty" style="grid-column:1/-1"><div class="empty-icon">📊</div><p>Нет данных. Начните тренировку!</p></div>';return}
   keys.forEach(id=>{
-    const st=exStats[id];
+    const st=stats[id];
     const sorted=st.sessions.sort((a,b)=>a.date.localeCompare(b.date));
     const last=sorted[sorted.length-1];
     const prev=sorted.length>1?sorted[sorted.length-2]:null;
-    const pct=st.best>0?Math.min(100,Math.round((last.done/st.best)*100)):0;
+    const pct=st.best>0?Math.min(100,Math.round(last.done/st.best*100)):0;
     const trend=prev?last.done-prev.done:0;
-    const trendStr=trend>0?`+${trend}`:trend<0?`${trend}`:'=';
-    const trendColor=trend>0?'#22c55e':trend<0?'#ef4444':'var(--color-text-secondary)';
-    const card=document.createElement('div');
-    card.className='progress-card';
-    card.innerHTML=`
-      <div class="prog-header">
-        <div class="prog-icon">${st.icon}</div>
-        <div class="prog-name">${st.name}</div>
-        <div class="prog-best">Рекорд: <strong>${st.best}</strong></div>
-      </div>
-      <div class="prog-bar-bg"><div class="prog-bar" style="width:${pct}%"></div></div>
-      <div class="prog-stats">
-        <div class="prog-stat">Последний раз: <strong>${last.done}</strong></div>
-        <div class="prog-stat">Сессий: <strong>${sorted.length}</strong></div>
-        <div class="prog-stat">Динамика: <strong style="color:${trendColor}">${trendStr}</strong></div>
-      </div>`;
-    pl.appendChild(card);
+    const tc=trend>0?'#22c55e':trend<0?'#ef4444':'var(--col-txt2)';
+    const ts=trend>0?`+${trend}`:trend===0?'—':`${trend}`;
+    const c=document.createElement('div');
+    c.className='prog-card';
+    c.innerHTML=`
+<div class="prog-top">
+  <div class="prog-ico">${st.icon}</div>
+  <div class="prog-nm">${st.name}</div>
+  <div class="prog-rec">Рекорд: <strong>${st.best}</strong></div>
+</div>
+<div class="prog-bar-bg"><div class="prog-bar" style="width:${pct}%"></div></div>
+<div class="prog-stats">
+  <div class="prog-stat">Последний: <strong>${last.done}</strong></div>
+  <div class="prog-stat">Сессий: <strong>${sorted.length}</strong></div>
+  <div class="prog-stat">Динамика: <strong style="color:${tc}">${ts}</strong></div>
+</div>`;
+    pl.appendChild(c);
   });
 }
 
-function renderAll(){
-  renderDates();
-  renderWorkout();
-  renderModal();
-  renderDashboard();
-}
-
-function switchTab(tab){
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+function switchTab(tab, el){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  event.target.classList.add('active');
+  document.querySelectorAll('.mob-tab,.snav-item').forEach(t=>t.classList.remove('active'));
   document.getElementById('page-'+tab).classList.add('active');
+  document.querySelectorAll('#mtab-'+tab+',#snav-'+tab).forEach(t=>t.classList.add('active'));
   if(tab==='dashboard')renderDashboard();
 }
 
+function renderAll(){renderDates();renderWorkout();renderModal();renderDashboard()}
 renderAll();
 </script>
