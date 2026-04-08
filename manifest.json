@@ -1,0 +1,11 @@
+{
+  "name": "Дневник тренировок",
+  "short_name": "Тренировки",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#22c55e",
+  "theme_color": "#22c55e",
+  "icons": [
+    { "src": "icon.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
