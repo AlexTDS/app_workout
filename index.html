@@ -12,7 +12,7 @@
   --bg:#f2f2f7;--bg1:#fff;--bg2:#f0f0f0;--bg3:#e0e0e0;
   --txt:#1a1a1a;--txt2:#666;--txt3:#aaa;
   --brd:rgba(0,0,0,0.1);--brd2:rgba(0,0,0,0.18);
-  --green:#22c55e;--red:#ef4444;--blue:#3b82f6;--orange:#f97316;--purple:#a855f7;
+  --green:#22c55e;--red:#ef4444;--blue:#3b82f6;--orange:#f97316;
   --r:14px;
 }
 @media(prefers-color-scheme:dark){:root{
@@ -24,7 +24,7 @@ html,body{min-height:100vh;background:var(--bg);color:var(--txt);font-family:-ap
 .wrap{display:flex;flex-direction:column;min-height:100vh}
 @media(min-width:768px){
   .wrap{flex-direction:row}
-  .sidebar{display:flex!important;flex-direction:column;width:230px;background:var(--bg1);border-right:1px solid var(--brd);padding:24px 0;position:sticky;top:0;height:100vh;flex-shrink:0}
+  .sidebar{display:flex!important;flex-direction:column;width:230px;background:var(--bg1);border-right:1px solid var(--brd);padding:24px 0;position:sticky;top:0;height:100vh;flex-shrink:0;overflow-y:auto}
   .s-logo{font-size:17px;font-weight:700;padding:0 20px 20px;border-bottom:1px solid var(--brd);margin-bottom:8px}
   .snav{display:flex;flex-direction:column;gap:2px;padding:0 8px}
   .si{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:10px;cursor:pointer;font-size:15px;font-weight:500;color:var(--txt2);transition:all .15s}
@@ -33,26 +33,26 @@ html,body{min-height:100vh;background:var(--bg);color:var(--txt);font-family:-ap
   .mob-hdr,.mob-tabs{display:none!important}
   .content{padding:24px 28px}
 }
-@media(min-width:1200px){.sidebar{width:260px}.content{max-width:960px;padding:32px 40px}}
+@media(min-width:1200px){.sidebar{width:260px}.content{max-width:980px;padding:32px 40px}}
 .sidebar{display:none}
 .mob-hdr{background:var(--bg1);border-bottom:1px solid var(--brd);height:52px;display:flex;align-items:center;justify-content:center;position:sticky;top:0;z-index:100}
 .mob-hdr h1{font-size:17px;font-weight:700}
 .mob-tabs{display:flex;background:var(--bg1);border-top:1px solid var(--brd);position:sticky;bottom:0;z-index:100}
-.mt{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 0 12px;cursor:pointer;font-size:11px;font-weight:600;color:var(--txt3);gap:3px;transition:color .15s}
+.mt{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 0 12px;cursor:pointer;font-size:10px;font-weight:600;color:var(--txt3);gap:3px;transition:color .15s}
 .mt.active{color:var(--green)}
-.mt-ico{font-size:22px}
+.mt-ico{font-size:21px}
 .main{flex:1;display:flex;flex-direction:column;min-width:0}
 .content{flex:1;padding:14px;overflow-y:auto}
 .page{display:none}.page.active{display:block}
-
-/* COMMON */
 .card{background:var(--bg1);border-radius:var(--r);border:1px solid var(--brd);margin-bottom:10px;overflow:hidden}
+.cp{padding:14px 16px}
 .sec{font-size:11px;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:.7px;margin:16px 0 8px}
 .nbtn{width:44px;height:44px;border-radius:10px;border:1px solid var(--brd2);background:var(--bg2);cursor:pointer;font-size:22px;display:flex;align-items:center;justify-content:center;color:var(--txt);user-select:none;flex-shrink:0}
 .nbtn:active{background:var(--bg3)}
 .nval{min-width:56px;text-align:center;font-size:20px;font-weight:700;border:1px solid var(--brd2);border-radius:10px;padding:6px 4px;background:var(--bg2);color:var(--txt)}
 input[type=number]{-moz-appearance:textfield}
 input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
+select{height:44px;border:1px solid var(--brd2);border-radius:10px;padding:0 10px;font-size:15px;background:var(--bg2);color:var(--txt);flex:1}
 
 /* DATE */
 .dstrip{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;margin-bottom:14px}
@@ -61,13 +61,10 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 .dchip.active{background:var(--txt);color:var(--bg);border-color:transparent}
 
 /* STEPS */
-.sp{padding:14px 16px}
 .sp-top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
-.sp-ico{font-size:24px}
-.sp-title{font-size:15px;font-weight:600;flex:1}
-.sp-pct{font-size:13px;font-weight:700;color:var(--green)}
+.sp-ico{font-size:24px}.sp-title{font-size:15px;font-weight:600;flex:1}.sp-pct{font-size:13px;font-weight:700;color:var(--green)}
 .bar-bg{height:8px;border-radius:4px;background:var(--bg3);overflow:hidden;margin-bottom:10px}
-.bar-fill{height:100%;border-radius:4px;background:var(--green);transition:width .4s}
+.bar-fill{height:100%;border-radius:4px;transition:width .4s}
 .sp-row{display:flex;align-items:center;gap:8px}
 .sp-inp{width:100px;text-align:center;font-size:22px;font-weight:700;border:1px solid var(--brd2);border-radius:10px;padding:6px 4px;background:var(--bg2);color:var(--txt)}
 .sp-of{font-size:12px;color:var(--txt2);flex:1;padding-left:4px}
@@ -77,11 +74,9 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 .mb-bar.tod{opacity:1}
 .mb-lbl{font-size:9px;color:var(--txt3)}
 
-/* WORKOUT */
-.wt-inp{width:100%;font-size:18px;font-weight:700;border:none;background:transparent;color:var(--txt);outline:none;padding:4px 0;border-bottom:2px solid var(--brd2);margin-bottom:14px}
-.wt-inp:focus{border-bottom-color:var(--green)}
-.ex-hdr{display:flex;align-items:center;gap:10px;padding:13px 14px;cursor:pointer;min-height:52px}
-.ex-ico{width:42px;height:42px;border-radius:10px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+/* EXERCISE CARD */
+.ex-hdr{display:flex;align-items:center;gap:10px;padding:13px 14px;cursor:pointer;min-height:56px}
+.ex-ico{width:44px;height:44px;border-radius:12px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
 .ex-inf{flex:1;min-width:0}
 .ex-nm{font-size:15px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ex-mt{font-size:13px;color:var(--txt2);margin-top:2px}
@@ -96,70 +91,103 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 .bok{background:#dcfce7;color:#15803d}.bfail{background:#fee2e2;color:#b91c1c}.bnone{background:var(--bg2);color:var(--txt2)}
 .exfoot{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
 .del{font-size:13px;color:var(--txt3);cursor:pointer;padding:6px 0;min-height:44px;display:flex;align-items:center}
-.add-btn{width:100%;height:50px;border-radius:var(--r);border:2px dashed var(--brd2);background:transparent;color:var(--txt2);font-size:15px;font-weight:500;cursor:pointer;margin-top:4px;display:flex;align-items:center;justify-content:center;gap:8px}
+.del:active{color:var(--red)}
+
+/* ADD BTN */
+.add-btn{width:100%;height:52px;border-radius:var(--r);border:2px dashed var(--brd2);background:transparent;color:var(--txt2);font-size:15px;font-weight:500;cursor:pointer;margin-top:4px;display:flex;align-items:center;justify-content:center;gap:8px}
 .add-btn:active{background:var(--bg2)}
 .empty{text-align:center;padding:36px 20px;color:var(--txt2)}
 .empty-ico{font-size:44px;margin-bottom:12px}
 
-/* DASHBOARD CHARTS */
+/* BODY */
+.prof-card{background:var(--bg1);border-radius:var(--r);border:1px solid var(--brd);padding:16px;margin-bottom:10px}
+.prof-title{font-size:15px;font-weight:700;margin-bottom:12px}
+.pf-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.pf-lbl{font-size:14px;font-weight:500;width:80px;flex-shrink:0;color:var(--txt2)}
+.pf-inp{flex:1;height:44px;border:1px solid var(--brd2);border-radius:10px;padding:0 12px;font-size:16px;font-weight:600;background:var(--bg2);color:var(--txt)}
+.pf-unit{font-size:13px;color:var(--txt2);width:28px;flex-shrink:0}
+.imt-card{background:var(--bg1);border-radius:var(--r);border:1px solid var(--brd);padding:16px;margin-bottom:10px}
+.imt-top{display:flex;align-items:flex-start;gap:14px;margin-bottom:12px}
+.imt-num{font-size:48px;font-weight:800;line-height:1}
+.imt-right{flex:1}
+.imt-label{font-size:16px;font-weight:700;margin-bottom:2px}
+.imt-sub{font-size:13px;color:var(--txt2)}
+.imt-bar{position:relative;height:10px;border-radius:5px;background:linear-gradient(to right,#3b82f6 0%,#22c55e 25%,#f59e0b 50%,#f97316 75%,#ef4444 100%);margin-bottom:6px}
+.imt-needle{position:absolute;top:-3px;width:4px;height:16px;border-radius:2px;background:var(--txt);transform:translateX(-50%);transition:left .5s}
+.imt-scale{display:flex;justify-content:space-between;font-size:10px;color:var(--txt3)}
+.kcal-card{background:var(--bg1);border-radius:var(--r);border:1px solid var(--brd);padding:16px;margin-bottom:10px}
+.kcal-title{font-size:15px;font-weight:700;margin-bottom:12px}
+.kcal-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+@media(min-width:500px){.kcal-grid{grid-template-columns:repeat(3,1fr)}}
+.kcal-item{background:var(--bg2);border-radius:10px;padding:10px 12px;text-align:center}
+.kcal-n{font-size:20px;font-weight:700}
+.kcal-l{font-size:11px;color:var(--txt2);margin-top:2px}
+.kcal-note{font-size:12px;color:var(--txt2);line-height:1.5;background:var(--bg2);border-radius:10px;padding:10px 12px}
+.meas-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+@media(min-width:500px){.meas-grid{grid-template-columns:repeat(3,1fr)}}
+.meas-card{background:var(--bg1);border-radius:var(--r);border:1px solid var(--brd);padding:12px 14px;cursor:pointer}
+.meas-ico{font-size:20px;margin-bottom:5px}
+.meas-name{font-size:12px;color:var(--txt2);font-weight:500;margin-bottom:3px}
+.meas-val{font-size:22px;font-weight:700}
+.meas-unit{font-size:12px;color:var(--txt2)}
+.meas-delta{font-size:12px;font-weight:600;margin-top:2px}
+.bh-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--brd)}
+.bh-row:last-child{border-bottom:none}
+.bh-date{font-size:12px;color:var(--txt2);width:68px;flex-shrink:0}
+.bh-vals{display:flex;flex-wrap:wrap;gap:5px;flex:1}
+.bh-chip{font-size:12px;padding:3px 8px;border-radius:8px;background:var(--bg2);font-weight:500}
+
+/* DASHBOARD */
 .sum-bar{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
 .sc{background:var(--bg1);border-radius:10px;border:1px solid var(--brd);padding:12px;text-align:center}
 .sc-n{font-size:26px;font-weight:700;line-height:1.1}
 .sc-l{font-size:11px;color:var(--txt2);margin-top:3px}
 .wnav{display:flex;align-items:center;gap:8px;margin-bottom:12px}
-.wnav button{width:36px;height:36px;border-radius:8px;border:1px solid var(--brd2);background:var(--bg1);cursor:pointer;font-size:18px;color:var(--txt);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.wnav button{width:36px;height:36px;border-radius:8px;border:1px solid var(--brd2);background:var(--bg1);cursor:pointer;font-size:18px;color:var(--txt);display:flex;align-items:center;justify-content:center}
 .wnav button:active{background:var(--bg2)}
 .w-lbl{flex:1;text-align:center;font-size:14px;font-weight:600}
 .chart-card{background:var(--bg1);border-radius:var(--r);border:1px solid var(--brd);padding:14px 16px;margin-bottom:10px}
-.ct-title{font-size:14px;font-weight:600;margin-bottom:4px;display:flex;align-items:center;gap:6px}
-.legend{display:flex;gap:14px;margin-bottom:10px;flex-wrap:wrap}
+.ct-title{font-size:14px;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.legend{display:flex;gap:12px;margin-bottom:10px;flex-wrap:wrap}
 .leg-item{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--txt2)}
 .leg-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0}
 .leg-line{width:18px;height:2px;flex-shrink:0}
 .cw{position:relative;width:100%;height:150px}
 .cdays{display:flex;justify-content:space-between;padding:0 2px;margin-top:4px}
 .cd{font-size:11px;color:var(--txt3);text-align:center;flex:1}
+.gtabs{display:flex;gap:6px;margin-bottom:12px}
+.gtab{flex:1;height:38px;border-radius:10px;border:1px solid var(--brd2);background:transparent;cursor:pointer;font-size:13px;font-weight:600;color:var(--txt2);transition:all .15s}
+.gtab.active{background:var(--txt);color:var(--bg);border-color:transparent}
 
-/* BODY SECTION */
-.body-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
-@media(min-width:600px){.body-grid{grid-template-columns:repeat(3,1fr)}}
-.bm-card{background:var(--bg1);border-radius:var(--r);border:1px solid var(--brd);padding:13px 14px;cursor:pointer;transition:all .15s}
-.bm-card:active{background:var(--bg2)}
-.bm-ico{font-size:22px;margin-bottom:6px}
-.bm-name{font-size:13px;font-weight:600;margin-bottom:4px}
-.bm-val{font-size:22px;font-weight:700;color:var(--blue)}
-.bm-unit{font-size:12px;color:var(--txt2)}
-.bm-delta{font-size:12px;font-weight:600;margin-top:2px}
-.body-hist{background:var(--bg1);border-radius:var(--r);border:1px solid var(--brd);padding:14px;margin-bottom:10px}
-.bh-title{font-size:14px;font-weight:600;margin-bottom:12px}
-.bh-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--brd)}
-.bh-row:last-child{border-bottom:none}
-.bh-date{font-size:12px;color:var(--txt2);width:70px;flex-shrink:0}
-.bh-vals{display:flex;flex-wrap:wrap;gap:6px;flex:1}
-.bh-chip{font-size:12px;padding:3px 8px;border-radius:8px;background:var(--bg2);font-weight:500}
-
-/* MODAL */
+/* MODALS */
 .modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:flex-end;justify-content:center}
 @media(min-width:768px){.modal-bg{align-items:center}}
 .modal-bg.open{display:flex}
-.modal{background:var(--bg1);border-radius:20px 20px 0 0;width:100%;max-width:540px;padding:24px 14px 36px;max-height:88vh;overflow-y:auto}
+.modal{background:var(--bg1);border-radius:20px 20px 0 0;width:100%;max-width:540px;padding:24px 16px 36px;max-height:90vh;overflow-y:auto}
 @media(min-width:768px){.modal{border-radius:var(--r)}}
-.mod-title{font-size:17px;font-weight:700;text-align:center;margin-bottom:16px}
-.ex-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
-@media(min-width:400px){.ex-grid{grid-template-columns:repeat(3,1fr)}}
-.expick{padding:12px 8px;border-radius:12px;border:1px solid var(--brd);background:var(--bg2);cursor:pointer;text-align:center;min-height:76px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
-.expick:active{transform:scale(.96)}
-.pi{font-size:26px}
-.pn{font-size:11px;font-weight:600;line-height:1.3}
-.mod-close{width:100%;height:50px;border-radius:10px;border:1px solid var(--brd2);background:transparent;color:var(--txt);font-size:15px;font-weight:500;cursor:pointer;margin-top:12px}
+.mod-title{font-size:17px;font-weight:700;text-align:center;margin-bottom:20px}
+.mod-close{width:100%;height:50px;border-radius:10px;border:1px solid var(--brd2);background:transparent;color:var(--txt);font-size:15px;font-weight:500;cursor:pointer;margin-top:10px}
+.save-btn{width:100%;height:50px;border-radius:10px;border:none;background:var(--green);color:#fff;font-size:16px;font-weight:700;cursor:pointer;margin-bottom:8px}
 
-/* BODY MODAL */
-.body-form{display:flex;flex-direction:column;gap:10px;margin-bottom:12px}
-.bf-row{display:flex;align-items:center;gap:10px}
-.bf-lbl{font-size:14px;font-weight:500;width:130px;flex-shrink:0}
+/* ADD EXERCISE FORM */
+.form-lbl{font-size:13px;font-weight:600;color:var(--txt2);margin-bottom:6px;display:block}
+.form-inp{width:100%;height:50px;border:1px solid var(--brd2);border-radius:12px;padding:0 14px;font-size:16px;font-weight:500;background:var(--bg2);color:var(--txt);margin-bottom:14px}
+.form-inp:focus{outline:none;border-color:var(--green)}
+.icon-preview{width:60px;height:60px;border-radius:14px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:32px;border:2px solid var(--brd2);cursor:pointer;margin-bottom:14px;flex-shrink:0}
+.icon-preview.selected{border-color:var(--green)}
+.icon-row{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.icon-row-right{flex:1}
+.icon-hint{font-size:12px;color:var(--txt2);margin-top:4px}
+.emoji-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:14px;max-height:240px;overflow-y:auto;padding:4px 0}
+.emoji-btn{height:44px;border-radius:10px;border:1px solid var(--brd);background:var(--bg2);cursor:pointer;font-size:22px;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.emoji-btn:active,.emoji-btn.sel{background:var(--green);border-color:var(--green)}
+.emoji-search{width:100%;height:44px;border:1px solid var(--brd2);border-radius:10px;padding:0 12px;font-size:15px;background:var(--bg2);color:var(--txt);margin-bottom:10px}
+.emoji-search:focus{outline:none;border-color:var(--green)}
+.target-row{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.bf-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.bf-lbl{font-size:14px;font-weight:500;width:140px;flex-shrink:0}
 .bf-inp{flex:1;height:44px;border:1px solid var(--brd2);border-radius:10px;padding:0 12px;font-size:16px;font-weight:600;background:var(--bg2);color:var(--txt);text-align:center}
 .bf-unit{font-size:13px;color:var(--txt2);width:24px}
-.save-btn{width:100%;height:50px;border-radius:10px;border:none;background:var(--green);color:#fff;font-size:16px;font-weight:700;cursor:pointer;margin-bottom:8px}
 </style>
 
 <div class="wrap">
@@ -178,9 +206,9 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
       <!-- WORKOUT -->
       <div class="page active" id="page-workout">
         <div class="dstrip" id="dateStrip"></div>
-        <div class="card"><div class="sp">
+        <div class="card"><div class="cp">
           <div class="sp-top"><div class="sp-ico">👟</div><div class="sp-title">Шаги</div><div class="sp-pct" id="sPct">0%</div></div>
-          <div class="bar-bg"><div class="bar-fill" id="sBar" style="width:0%"></div></div>
+          <div class="bar-bg"><div class="bar-fill" id="sBar" style="width:0%;background:var(--green)"></div></div>
           <div class="sp-row">
             <div class="nbtn" onclick="aS(-500)">−</div>
             <input class="sp-inp" type="number" id="sInp" value="0" inputmode="numeric" oninput="stepsIn(this.value)">
@@ -189,20 +217,47 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
           </div>
           <div class="mini-bars" id="miniBar"></div>
         </div></div>
-        <input class="wt-inp" type="text" id="wtTitle" placeholder="Название тренировки" maxlength="50">
         <div id="exList"></div>
-        <button class="add-btn" onclick="openMod()">＋ Добавить упражнение</button>
+        <button class="add-btn" onclick="openAddEx()">＋ Добавить упражнение</button>
       </div>
 
       <!-- BODY -->
       <div class="page" id="page-body">
-        <div class="sec">Показатели тела</div>
-        <div class="body-grid" id="bodyGrid"></div>
-        <button class="add-btn" style="margin-bottom:14px" onclick="openBodyMod()">＋ Добавить замер</button>
-        <div class="sec">История замеров</div>
-        <div class="body-hist"><div id="bodyHist"></div></div>
-        <div class="sec">Графики обхватов</div>
-        <div id="bodyCharts"></div>
+        <div class="prof-card">
+          <div class="prof-title">👤 Профиль</div>
+          <div class="pf-row"><div class="pf-lbl">Пол</div><select id="pf-sex" onchange="saveProf()"><option value="m">Мужской</option><option value="f">Женский</option></select></div>
+          <div class="pf-row"><div class="pf-lbl">Возраст</div><input class="pf-inp" type="number" id="pf-age" placeholder="30" inputmode="numeric" onchange="saveProf()"><div class="pf-unit">лет</div></div>
+          <div class="pf-row"><div class="pf-lbl">Рост</div><input class="pf-inp" type="number" id="pf-height" placeholder="175" inputmode="numeric" onchange="saveProf()"><div class="pf-unit">см</div></div>
+          <div class="pf-row"><div class="pf-lbl">Активность</div><select id="pf-act" onchange="saveProf()">
+            <option value="1.2">Минимальная (сидячий)</option>
+            <option value="1.375">Лёгкая (1-3 дня/нед)</option>
+            <option value="1.55" selected>Средняя (3-5 дней/нед)</option>
+            <option value="1.725">Высокая (6-7 дней/нед)</option>
+            <option value="1.9">Очень высокая</option>
+          </select></div>
+        </div>
+        <div class="imt-card" id="imtCard">
+          <div class="imt-top">
+            <div><div style="font-size:12px;color:var(--txt2);margin-bottom:2px">ИМТ</div><div class="imt-num" id="imtNum">—</div></div>
+            <div class="imt-right"><div class="imt-label" id="imtLabel"></div><div class="imt-sub" id="imtSub">Добавьте замер веса и рост</div></div>
+          </div>
+          <div class="imt-bar"><div class="imt-needle" id="imtNeedle" style="left:0%"></div></div>
+          <div class="imt-scale"><span>16</span><span>18.5</span><span>25</span><span>30</span><span>40</span></div>
+        </div>
+        <div class="kcal-card">
+          <div class="kcal-title">🔥 Норма калорий</div>
+          <div class="kcal-grid">
+            <div class="kcal-item"><div class="kcal-n" id="kc-base">—</div><div class="kcal-l">Базовый обмен</div></div>
+            <div class="kcal-item"><div class="kcal-n" id="kc-maint">—</div><div class="kcal-l">Поддержание</div></div>
+            <div class="kcal-item"><div class="kcal-n" id="kc-loss">—</div><div class="kcal-l">Похудение</div></div>
+          </div>
+          <div class="kcal-note" id="kcalNote">Заполните профиль и добавьте замер веса</div>
+        </div>
+        <div class="sec">Замеры</div>
+        <div class="meas-grid" id="measGrid"></div>
+        <button class="add-btn" style="margin-bottom:14px" onclick="openMeasMod()">＋ Добавить замер</button>
+        <div class="sec">История</div>
+        <div class="card"><div class="cp" id="measHist"></div></div>
       </div>
 
       <!-- DASHBOARD -->
@@ -212,15 +267,25 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
           <div class="sc"><div class="sc-n" id="sumE">0</div><div class="sc-l">упражнений</div></div>
           <div class="sc"><div class="sc-n" id="sumR">0</div><div class="sc-l">повторений</div></div>
         </div>
-        <div class="chart-card">
-          <div class="ct-title">👟 Шаги за неделю</div>
-          <div class="legend"><div class="leg-item"><div class="leg-dot" style="background:var(--green)"></div>Шаги</div><div class="leg-item"><div class="leg-line" style="background:var(--orange)"></div>Цель</div></div>
-          <div class="wnav"><button onclick="shW(-1)">‹</button><div class="w-lbl" id="wLbl"></div><button onclick="shW(1)">›</button></div>
-          <div class="cw"><canvas id="stepsChart"></canvas></div>
-          <div class="cdays" id="sDays"></div>
+        <div class="gtabs">
+          <button class="gtab active" id="gt-tr" onclick="switchGroup('tr')">💪 Тренировки</button>
+          <button class="gtab" id="gt-body" onclick="switchGroup('body')">📏 Тело</button>
         </div>
-        <div class="sec">Прогресс упражнений</div>
-        <div id="exCharts"></div>
+        <div id="dash-tr">
+          <div class="chart-card">
+            <div class="ct-title">👟 Шаги за неделю</div>
+            <div class="legend"><div class="leg-item"><div class="leg-dot" style="background:var(--green)"></div>Шаги</div><div class="leg-item"><div class="leg-line" style="background:var(--orange)"></div>Цель</div></div>
+            <div class="wnav"><button onclick="shW(-1)">‹</button><div class="w-lbl" id="wLbl"></div><button onclick="shW(1)">›</button></div>
+            <div class="cw"><canvas id="stepsChart"></canvas></div>
+            <div class="cdays" id="sDays"></div>
+          </div>
+          <div class="sec">Упражнения</div>
+          <div id="exCharts"></div>
+        </div>
+        <div id="dash-body" style="display:none">
+          <div class="wnav"><button onclick="shW(-1)">‹</button><div class="w-lbl" id="wLblB"></div><button onclick="shW(1)">›</button></div>
+          <div id="bodyCharts"></div>
+        </div>
       </div>
     </div>
     <nav class="mob-tabs">
@@ -231,72 +296,118 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
   </div>
 </div>
 
-<!-- EXERCISE MODAL -->
-<div class="modal-bg" id="exModal" onclick="if(event.target===this)closeMod()">
+<!-- ADD EXERCISE MODAL -->
+<div class="modal-bg" id="addExModal" onclick="if(event.target===this)closeAddEx()">
   <div class="modal">
-    <div class="mod-title">Выбрать упражнение</div>
-    <div class="ex-grid" id="exPick"></div>
-    <button class="mod-close" onclick="closeMod()">Закрыть</button>
+    <div class="mod-title">Новое упражнение</div>
+
+    <label class="form-lbl">Название</label>
+    <input class="form-inp" type="text" id="ex-name-inp" placeholder="Например: Отжимания" maxlength="40">
+
+    <label class="form-lbl">Иконка</label>
+    <div class="icon-row">
+      <div class="icon-preview selected" id="iconPreview" onclick="toggleEmojiPicker()">🏋️</div>
+      <div class="icon-row-right">
+        <div style="font-size:13px;font-weight:500;margin-bottom:4px">Выбранная иконка</div>
+        <div class="icon-hint">Нажмите на иконку чтобы выбрать другую</div>
+      </div>
+    </div>
+    <div id="emojiPickerWrap" style="display:none">
+      <input class="emoji-search" type="text" placeholder="Поиск эмодзи..." oninput="filterEmoji(this.value)" id="emojiSearch">
+      <div class="emoji-grid" id="emojiGrid"></div>
+    </div>
+
+    <label class="form-lbl">Целевое количество повторений</label>
+    <div class="target-row">
+      <div class="nbtn" onclick="adjTarget(-1)">−</div>
+      <input class="nval" type="number" id="ex-target-inp" value="10" inputmode="numeric" style="flex:1;text-align:center;font-size:24px" min="1">
+      <div class="nbtn" onclick="adjTarget(1)">+</div>
+      <span style="font-size:14px;color:var(--txt2);margin-left:4px">повт.</span>
+    </div>
+
+    <button class="save-btn" onclick="saveNewEx()">Добавить упражнение</button>
+    <button class="mod-close" onclick="closeAddEx()">Отмена</button>
   </div>
 </div>
 
-<!-- BODY MODAL -->
-<div class="modal-bg" id="bodyModal" onclick="if(event.target===this)closeBodyMod()">
+<!-- MEAS MODAL -->
+<div class="modal-bg" id="measModal" onclick="if(event.target===this)closeMeasMod()">
   <div class="modal">
     <div class="mod-title">Добавить замер</div>
-    <div class="body-form" id="bodyForm"></div>
-    <button class="save-btn" onclick="saveBody()">Сохранить</button>
-    <button class="mod-close" onclick="closeBodyMod()">Отмена</button>
+    <div id="measForm"></div>
+    <button class="save-btn" onclick="saveMeas()">Сохранить</button>
+    <button class="mod-close" onclick="closeMeasMod()">Отмена</button>
   </div>
 </div>
 
 <script>
-const EX=[
-  {id:'pushup',name:'Отжимания',icon:'🤜'},{id:'burpee',name:'Берпи',icon:'⚡'},
-  {id:'squat',name:'Приседания',icon:'🦵'},{id:'abs',name:'Пресс',icon:'💪'},
-  {id:'kb_chin',name:'Подъём гири к подбородку',icon:'🏋️'},{id:'kb_swing',name:'Махи гирей вперёд',icon:'🔄'},
-  {id:'kb_squat',name:'Присед с гирей',icon:'🏋️'},{id:'kb_press',name:'Жим гири за головой',icon:'⬆️'},
-  {id:'kb_halo',name:'Вращение над головой',icon:'🌀'},{id:'kb_bend',name:'Наклоны с гирей',icon:'↙️'},
-  {id:'kb_row',name:'Тяга одной рукой',icon:'💪'},{id:'kb_lunge',name:'Выпады с гирей',icon:'🚶'},
-  {id:'kb_push',name:'Выталкивание над головой',icon:'🔝'},{id:'kb_orbit',name:'Вращение вокруг корпуса',icon:'🔃'},
-];
-const BODY_METRICS=[
+const MEAS=[
+  {id:'weight',name:'Вес',icon:'⚖️',unit:'кг'},
+  {id:'height',name:'Рост',icon:'📏',unit:'см'},
   {id:'chest',name:'Грудная клетка',icon:'🫁',unit:'см'},
   {id:'waist',name:'Талия',icon:'⌛',unit:'см'},
-  {id:'hips',name:'Бёдра',icon:'🔻',unit:'см'},
-  {id:'thigh',name:'Бедро',icon:'🦵',unit:'см'},
   {id:'shoulder',name:'Плечо',icon:'💪',unit:'см'},
-  {id:'weight',name:'Вес',icon:'⚖️',unit:'кг'},
 ];
+const MEAS_COLORS={weight:'#3b82f6',height:'#14b8a6',chest:'#a855f7',waist:'#f97316',shoulder:'#10b981'};
 const DAYS=['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
-const DEFAULT_TPL=[{id:'pushup',target:20,done:0,open:false},{id:'squat',target:30,done:0,open:false},{id:'abs',target:20,done:0,open:false}];
-let S={sessions:{},body:[],stepsGoal:10000,weekOff:0};
-let curDate=today();
+
+// Большой набор эмодзи для выбора
+const ALL_EMOJI=[
+  {e:'🏋️',t:'штанга'},{e:'💪',t:'мышца'},{e:'🤜',t:'кулак'},{e:'⚡',t:'молния'},{e:'🦵',t:'нога'},
+  {e:'🔥',t:'огонь'},{e:'❤️',t:'сердце'},{e:'🏃',t:'бег'},{e:'🚶',t:'ходьба'},{e:'🧘',t:'йога'},
+  {e:'⬆️',t:'вверх'},{e:'🔄',t:'повтор'},{e:'🌀',t:'вращение'},{e:'↙️',t:'наклон'},{e:'🔃',t:'цикл'},
+  {e:'🔝',t:'топ'},{e:'🤸',t:'акробат'},{e:'🏊',t:'плавание'},{e:'🚴',t:'велосипед'},{e:'⛹️',t:'баскетбол'},
+  {e:'🤾',t:'гандбол'},{e:'🏇',t:'верховая'},{e:'🥊',t:'бокс'},{e:'🥋',t:'карате'},{e:'🏹',t:'стрельба'},
+  {e:'🎯',t:'цель'},{e:'🏆',t:'кубок'},{e:'🥇',t:'золото'},{e:'⭐',t:'звезда'},{e:'✨',t:'блеск'},
+  {e:'💥',t:'взрыв'},{e:'🎽',t:'майка'},{e:'👟',t:'кроссовок'},{e:'🧗',t:'скалолазание'},{e:'🤼',t:'борьба'},
+  {e:'🏄',t:'серфинг'},{e:'🚣',t:'гребля'},{e:'🤺',t:'фехтование'},{e:'🏌️',t:'гольф'},{e:'🎾',t:'теннис'},
+  {e:'🏸',t:'бадминтон'},{e:'🥅',t:'ворота'},{e:'⚽',t:'футбол'},{e:'🏀',t:'баскетбол'},{e:'🏈',t:'американский футбол'},
+  {e:'⚾',t:'бейсбол'},{e:'🏐',t:'волейбол'},{e:'🏉',t:'регби'},{e:'🎱',t:'бильярд'},{e:'🏓',t:'пинг-понг'},
+  {e:'🦾',t:'протез'},{e:'🧠',t:'мозг'},{e:'🫀',t:'сердце'},{e:'🫁',t:'лёгкое'},{e:'🦴',t:'кость'},
+  {e:'🔵',t:'синий'},{e:'🟢',t:'зелёный'},{e:'🔴',t:'красный'},{e:'🟡',t:'жёлтый'},{e:'🟣',t:'фиолетовый'},
+];
+
+let S={sessions:{},measurements:[],profile:{sex:'m',age:0,height:0,act:1.55},stepsGoal:10000,weekOff:0};
+let curDate=today(),dashGroup='tr',selectedIcon='🏋️';
+
 function today(){return new Date().toISOString().slice(0,10)}
-function load(){try{let d=localStorage.getItem('wkd5');if(d)S=JSON.parse(d)}catch(e){}}
-function save(){try{localStorage.setItem('wkd5',JSON.stringify(S))}catch(e){}}
+function load(){try{let d=localStorage.getItem('wkd8');if(d)S=JSON.parse(d)}catch(e){}}
+function save(){try{localStorage.setItem('wkd8',JSON.stringify(S))}catch(e){}}
+
 function sess(d){
   if(!S.sessions[d]){
     const keys=Object.keys(S.sessions).sort();
-    let tpl=DEFAULT_TPL;
-    if(keys.length){const l=S.sessions[keys[keys.length-1]];if(l.exercises&&l.exercises.length)tpl=l.exercises.map(e=>({id:e.id,target:e.target||10,done:0,open:false}))}
-    S.sessions[d]={title:'',exercises:JSON.parse(JSON.stringify(tpl)),steps:0};
+    let tpl=[];
+    if(keys.length){
+      const l=S.sessions[keys[keys.length-1]];
+      if(l.exercises&&l.exercises.length)
+        tpl=l.exercises.map(e=>({id:e.id,name:e.name,icon:e.icon,target:e.target||10,done:0,open:false}));
+    }
+    S.sessions[d]={exercises:JSON.parse(JSON.stringify(tpl)),steps:0};
   }
   return S.sessions[d];
 }
 load();
 
-// ---- NAV ----
+// NAV
 function SW(tab,el){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.mt,.si').forEach(t=>t.classList.remove('active'));
   document.getElementById('page-'+tab).classList.add('active');
   ['mt-'+tab[0],'si-'+tab[0]].forEach(id=>{const e=document.getElementById(id);if(e)e.classList.add('active')});
   if(tab==='dashboard')renderDash();
-  if(tab==='body')renderBody();
+  if(tab==='body'){loadProf();renderBodyPage();}
+}
+function switchGroup(g){
+  dashGroup=g;
+  document.querySelectorAll('.gtab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('gt-'+g).classList.add('active');
+  document.getElementById('dash-tr').style.display=g==='tr'?'block':'none';
+  document.getElementById('dash-body').style.display=g==='body'?'block':'none';
+  if(g==='body')renderBodyCharts();
 }
 
-// ---- DATES ----
+// DATES
 function renderDates(){
   const el=document.getElementById('dateStrip');el.innerHTML='';
   for(let i=13;i>=0;i--){
@@ -310,7 +421,7 @@ function renderDates(){
   el.scrollLeft=el.scrollWidth;
 }
 
-// ---- STEPS ----
+// STEPS
 function renderSteps(){
   const se=sess(curDate),steps=se.steps||0,goal=S.stepsGoal||10000;
   const pct=Math.min(100,Math.round(steps/goal*100));
@@ -318,7 +429,6 @@ function renderSteps(){
   document.getElementById('sBar').style.width=pct+'%';
   document.getElementById('sPct').textContent=pct+'%';
   document.getElementById('sOf').textContent='из '+goal.toLocaleString('ru');
-  // mini week
   const el=document.getElementById('miniBar');el.innerHTML='';
   const now=new Date(curDate),dow=now.getDay();
   const mon=new Date(now);mon.setDate(now.getDate()-(dow===0?6:dow-1));
@@ -334,19 +444,20 @@ function renderSteps(){
 function aS(d){const se=sess(curDate);se.steps=Math.max(0,(se.steps||0)+d);save();renderSteps()}
 function stepsIn(v){const se=sess(curDate);se.steps=parseInt(v)||0;save();renderSteps()}
 
-// ---- WORKOUT ----
+// WORKOUT LIST
 function renderWList(){
   const se=sess(curDate);
-  document.getElementById('wtTitle').value=se.title||'';
   const el=document.getElementById('exList');el.innerHTML='';
-  if(!se.exercises.length){el.innerHTML='<div class="empty"><div class="empty-ico">🏋️</div><p>Нет упражнений</p></div>';return}
+  if(!se.exercises.length){
+    el.innerHTML='<div class="empty"><div class="empty-ico">🏋️</div><p style="font-size:15px;font-weight:500">Нет упражнений</p><p style="font-size:13px;margin-top:6px;color:var(--txt3)">Нажмите «Добавить упражнение»</p></div>';
+    return;
+  }
   se.exercises.forEach((ex,i)=>{
-    const def=EX.find(e=>e.id===ex.id)||{name:ex.id,icon:'•'};
     const t=ex.target||10,d=ex.done||0,ok=d>=t&&d>0;
     const div=document.createElement('div');div.className='card';
     div.innerHTML=`<div class="ex-hdr" onclick="togE(${i})">
-<div class="ex-ico">${def.icon}</div>
-<div class="ex-inf"><div class="ex-nm">${def.name}</div><div class="ex-mt">${d} / ${t} повт.</div></div>
+<div class="ex-ico">${ex.icon||'🏋️'}</div>
+<div class="ex-inf"><div class="ex-nm">${ex.name}</div><div class="ex-mt">${d} / ${t} повт.</div></div>
 <div class="ex-chk${ok?' done':''}">${ok?'✓':''}</div>
 </div>
 <div class="ex-body${ex.open?' open':''}">
@@ -361,245 +472,191 @@ function togE(i){const s=sess(curDate);s.exercises[i].open=!s.exercises[i].open;
 function aE(i,f,d){const s=sess(curDate);let v=(s.exercises[i][f]||0)+d;if(v<0)v=0;s.exercises[i][f]=v;save();renderWList()}
 function setD(i,v){const s=sess(curDate);s.exercises[i].done=parseInt(v)||0;save();renderWList()}
 function delE(i){const s=sess(curDate);s.exercises.splice(i,1);save();renderWList()}
-document.getElementById('wtTitle').oninput=function(){sess(curDate).title=this.value;save()}
 function renderWP(){renderDates();renderSteps();renderWList()}
 
-// ---- EXERCISE MODAL ----
-function openMod(){
-  const el=document.getElementById('exPick');el.innerHTML='';
-  EX.forEach(ex=>{const d=document.createElement('div');d.className='expick';
-    d.innerHTML=`<div class="pi">${ex.icon}</div><div class="pn">${ex.name}</div>`;
-    d.onclick=()=>{sess(curDate).exercises.push({id:ex.id,target:10,done:0,open:true});save();renderWList();closeMod()};
-    el.appendChild(d);
+// ADD EXERCISE MODAL
+let emojiOpen=false;
+function openAddEx(){
+  selectedIcon='🏋️';
+  document.getElementById('ex-name-inp').value='';
+  document.getElementById('ex-target-inp').value='10';
+  document.getElementById('iconPreview').textContent=selectedIcon;
+  emojiOpen=false;
+  document.getElementById('emojiPickerWrap').style.display='none';
+  document.getElementById('emojiSearch').value='';
+  renderEmojiGrid('');
+  document.getElementById('addExModal').classList.add('open');
+  setTimeout(()=>document.getElementById('ex-name-inp').focus(),300);
+}
+function closeAddEx(){document.getElementById('addExModal').classList.remove('open')}
+
+function renderEmojiGrid(filter){
+  const grid=document.getElementById('emojiGrid');grid.innerHTML='';
+  const list=filter?ALL_EMOJI.filter(e=>e.t.includes(filter.toLowerCase())||e.e.includes(filter)):ALL_EMOJI;
+  list.forEach(e=>{
+    const btn=document.createElement('div');btn.className='emoji-btn'+(e.e===selectedIcon?' sel':'');
+    btn.textContent=e.e;
+    btn.onclick=()=>{selectedIcon=e.e;document.getElementById('iconPreview').textContent=e.e;document.querySelectorAll('.emoji-btn').forEach(b=>b.classList.remove('sel'));btn.classList.add('sel')};
+    grid.appendChild(btn);
   });
-  document.getElementById('exModal').classList.add('open');
 }
-function closeMod(){document.getElementById('exModal').classList.remove('open')}
-
-// ---- BODY ----
-function openBodyMod(){
-  const form=document.getElementById('bodyForm');form.innerHTML='';
-  BODY_METRICS.forEach(m=>{
-    form.innerHTML+=`<div class="bf-row"><div class="bf-lbl">${m.icon} ${m.name}</div><input class="bf-inp" type="number" inputmode="decimal" id="bf_${m.id}" placeholder="—" step="0.1"><div class="bf-unit">${m.unit}</div></div>`;
-  });
-  document.getElementById('bodyModal').classList.add('open');
+function filterEmoji(v){renderEmojiGrid(v)}
+function toggleEmojiPicker(){
+  emojiOpen=!emojiOpen;
+  document.getElementById('emojiPickerWrap').style.display=emojiOpen?'block':'none';
+  if(emojiOpen)renderEmojiGrid('');
 }
-function closeBodyMod(){document.getElementById('bodyModal').classList.remove('open')}
-function saveBody(){
-  const entry={date:today(),vals:{}};
-  BODY_METRICS.forEach(m=>{const v=document.getElementById('bf_'+m.id).value;if(v)entry.vals[m.id]=parseFloat(v)});
-  if(!Object.keys(entry.vals).length){closeBodyMod();return}
-  if(!S.body)S.body=[];
-  const idx=S.body.findIndex(e=>e.date===entry.date);
-  if(idx>=0)Object.assign(S.body[idx].vals,entry.vals); else S.body.push(entry);
-  save();closeBodyMod();renderBody();
+function adjTarget(d){const inp=document.getElementById('ex-target-inp');let v=(parseInt(inp.value)||10)+d;if(v<1)v=1;inp.value=v}
+function saveNewEx(){
+  const name=document.getElementById('ex-name-inp').value.trim();
+  if(!name){document.getElementById('ex-name-inp').focus();document.getElementById('ex-name-inp').style.borderColor='var(--red)';setTimeout(()=>document.getElementById('ex-name-inp').style.borderColor='',1500);return}
+  const target=parseInt(document.getElementById('ex-target-inp').value)||10;
+  const id='custom_'+Date.now();
+  sess(curDate).exercises.push({id,name,icon:selectedIcon,target,done:0,open:false});
+  save();renderWList();closeAddEx();
 }
 
-function renderBody(){
-  if(!S.body)S.body=[];
-  const sorted=[...S.body].sort((a,b)=>b.date.localeCompare(a.date));
-  // latest values
-  const latest={};
-  sorted.forEach(e=>BODY_METRICS.forEach(m=>{if(e.vals[m.id]!==undefined&&latest[m.id]===undefined)latest[m.id]=e.vals[m.id]}));
-  // previous for delta
-  const prev={};
-  if(sorted.length>1){const prev_e=sorted[1];BODY_METRICS.forEach(m=>{if(prev_e.vals[m.id]!==undefined)prev[m.id]=prev_e.vals[m.id]})}
+// PROFILE
+function loadProf(){
+  const p=S.profile||{};
+  const s=document.getElementById('pf-sex');if(s)s.value=p.sex||'m';
+  const a=document.getElementById('pf-age');if(a)a.value=p.age||'';
+  const h=document.getElementById('pf-height');if(h)h.value=p.height||'';
+  const ac=document.getElementById('pf-act');if(ac)ac.value=p.act||1.55;
+}
+function saveProf(){
+  S.profile={sex:document.getElementById('pf-sex').value,age:parseInt(document.getElementById('pf-age').value)||0,height:parseFloat(document.getElementById('pf-height').value)||0,act:parseFloat(document.getElementById('pf-act').value)||1.55};
+  save();renderBodyPage();
+}
+function calcIMT(w,h){if(!w||!h||h<100)return null;const hm=h/100;return +(w/(hm*hm)).toFixed(1)}
+function imtCat(v){if(v<16)return{label:'Выраженный дефицит',color:'#3b82f6'};if(v<18.5)return{label:'Дефицит веса',color:'#60a5fa'};if(v<25)return{label:'Норма ✓',color:'#22c55e'};if(v<30)return{label:'Избыточный вес',color:'#f59e0b'};if(v<35)return{label:'Ожирение I',color:'#f97316'};return{label:'Ожирение II+',color:'#ef4444'}}
+function imtPct(v){return Math.min(100,Math.max(0,(v-16)/(40-16)*100))}
+function calcBMR(w,h,age,sex){if(!w||!h||!age)return null;return Math.round(sex==='m'?10*w+6.25*h-5*age+5:10*w+6.25*h-5*age-161)}
 
-  const grid=document.getElementById('bodyGrid');grid.innerHTML='';
-  BODY_METRICS.forEach(m=>{
-    const v=latest[m.id];const pv=prev[m.id];
-    let delta='',dc='';
-    if(v!==undefined&&pv!==undefined){const d=+(v-pv).toFixed(1);if(d!==0){delta=(d>0?'+':'')+d+' '+m.unit;dc=d>0?'var(--red)':'var(--green)'}}
-    const card=document.createElement('div');card.className='bm-card';card.onclick=()=>openBodyMod();
-    card.innerHTML=`<div class="bm-ico">${m.icon}</div><div class="bm-name">${m.name}</div><div class="bm-val">${v!==undefined?v:'—'}</div><div class="bm-unit">${m.unit}</div>${delta?`<div class="bm-delta" style="color:${dc}">${delta}</div>`:''}`;
+function renderBodyPage(){
+  if(!S.measurements)S.measurements=[];
+  const sorted=[...S.measurements].sort((a,b)=>b.date.localeCompare(a.date));
+  const latest={};sorted.forEach(e=>MEAS.forEach(m=>{if(e.vals[m.id]!==undefined&&latest[m.id]===undefined)latest[m.id]=e.vals[m.id]}));
+  const prev2={};if(sorted.length>1){const pe=sorted[1];MEAS.forEach(m=>{if(pe.vals[m.id]!==undefined)prev2[m.id]=pe.vals[m.id]})}
+  const p=S.profile||{};const weight=latest['weight'],heightVal=latest['height']||p.height;
+  const imt=calcIMT(weight,heightVal);
+  if(imt){document.getElementById('imtNum').textContent=imt;const cat=imtCat(imt);document.getElementById('imtLabel').textContent=cat.label;document.getElementById('imtLabel').style.color=cat.color;document.getElementById('imtSub').textContent=`Вес ${weight} кг · Рост ${heightVal} см`;document.getElementById('imtNeedle').style.left=imtPct(imt)+'%';}
+  else{document.getElementById('imtNum').textContent='—';document.getElementById('imtLabel').textContent='';document.getElementById('imtSub').textContent='Добавьте замеры веса и роста';document.getElementById('imtNeedle').style.left='0%';}
+  const bmr=p.age&&heightVal&&weight?calcBMR(weight,heightVal,p.age,p.sex||'m'):null;
+  if(bmr){const act=p.act||1.55,maint=Math.round(bmr*act),loss=Math.round(maint*0.8);document.getElementById('kc-base').textContent=bmr;document.getElementById('kc-maint').textContent=maint;document.getElementById('kc-loss').textContent=loss;document.getElementById('kcalNote').textContent=`Дефицит ~${maint-loss} ккал/день → потеря ~${((maint-loss)*7/7700).toFixed(1)} кг/нед. Не снижайте ниже 1200 ккал.`;}
+  else{['kc-base','kc-maint','kc-loss'].forEach(id=>document.getElementById(id).textContent='—');document.getElementById('kcalNote').textContent='Заполните профиль и добавьте замер веса';}
+  const grid=document.getElementById('measGrid');grid.innerHTML='';
+  MEAS.forEach(m=>{
+    const v=latest[m.id],pv=prev2[m.id];let delta='',dc='';
+    if(v!==undefined&&pv!==undefined){const d=+(v-pv).toFixed(1);if(d!==0){delta=(d>0?'+':'')+d+' '+m.unit;dc=['weight','waist','chest','shoulder'].includes(m.id)?(d>0?'var(--red)':'var(--green)'):(d>0?'var(--green)':'var(--red)')}}
+    const card=document.createElement('div');card.className='meas-card';card.onclick=()=>openMeasMod();
+    card.innerHTML=`<div class="meas-ico">${m.icon}</div><div class="meas-name">${m.name}</div><div class="meas-val" style="color:${MEAS_COLORS[m.id]||'var(--blue)'}">${v!==undefined?v:'—'}</div><div class="meas-unit">${m.unit}</div>${delta?`<div class="meas-delta" style="color:${dc}">${delta}</div>`:''}`;
     grid.appendChild(card);
   });
-
-  // history
-  const hist=document.getElementById('bodyHist');hist.innerHTML='';
-  if(!sorted.length){hist.innerHTML='<div class="empty" style="padding:20px"><p>Нет замеров</p></div>';
-  } else {
-    sorted.slice(0,10).forEach(e=>{
-      const row=document.createElement('div');row.className='bh-row';
-      const d=new Date(e.date);const dlbl=d.toLocaleDateString('ru',{day:'numeric',month:'short'});
-      const chips=BODY_METRICS.filter(m=>e.vals[m.id]!==undefined).map(m=>`<div class="bh-chip">${m.icon} ${e.vals[m.id]} ${m.unit}</div>`).join('');
-      row.innerHTML=`<div class="bh-date">${dlbl}</div><div class="bh-vals">${chips}</div>`;
-      hist.appendChild(row);
-    });
-  }
-
-  // charts
-  const bc=document.getElementById('bodyCharts');bc.innerHTML='';
-  const colors={chest:'#3b82f6',waist:'#f97316',hips:'#a855f7',thigh:'#ec4899',shoulder:'#14b8a6',weight:'#f59e0b'};
-  BODY_METRICS.forEach(m=>{
-    const pts=sorted.filter(e=>e.vals[m.id]!==undefined).reverse().slice(-8);
-    if(pts.length<2)return;
-    const cid='bc_'+m.id;
-    const div=document.createElement('div');div.className='chart-card';
-    div.innerHTML=`<div class="ct-title"><span>${m.icon}</span>${m.name}</div><div class="cw"><canvas id="${cid}"></canvas></div><div class="cdays" id="cd_${m.id}"></div>`;
-    bc.appendChild(div);
-    const labels=pts.map(e=>{const d=new Date(e.date);return d.toLocaleDateString('ru',{day:'numeric',month:'short'})});
-    const vals=pts.map(e=>e.vals[m.id]);
-    document.getElementById('cd_'+m.id).innerHTML=labels.map(l=>`<div class="cd" style="font-size:10px">${l}</div>`).join('');
-    setTimeout(()=>drawLineChart(cid,vals,colors[m.id]||'#3b82f6',null),60);
-  });
+  const hist=document.getElementById('measHist');hist.innerHTML='';
+  if(!sorted.length){hist.innerHTML='<div class="empty" style="padding:20px"><p>Нет замеров</p></div>';}
+  else{sorted.slice(0,8).forEach(e=>{const row=document.createElement('div');row.className='bh-row';const dlbl=new Date(e.date).toLocaleDateString('ru',{day:'numeric',month:'short'});const chips=MEAS.filter(m=>e.vals[m.id]!==undefined).map(m=>`<div class="bh-chip">${m.icon} ${e.vals[m.id]} ${m.unit}</div>`).join('');row.innerHTML=`<div class="bh-date">${dlbl}</div><div class="bh-vals">${chips}</div>`;hist.appendChild(row)});}
+}
+function openMeasMod(){
+  const form=document.getElementById('measForm');form.innerHTML='';
+  MEAS.forEach(m=>{form.innerHTML+=`<div class="bf-row"><div class="bf-lbl">${m.icon} ${m.name}</div><input class="bf-inp" type="number" inputmode="decimal" id="mf_${m.id}" placeholder="—" step="0.1"><div class="bf-unit">${m.unit}</div></div>`});
+  document.getElementById('measModal').classList.add('open');
+}
+function closeMeasMod(){document.getElementById('measModal').classList.remove('open')}
+function saveMeas(){
+  const entry={date:today(),vals:{}};
+  MEAS.forEach(m=>{const v=document.getElementById('mf_'+m.id).value;if(v)entry.vals[m.id]=parseFloat(v)});
+  if(!Object.keys(entry.vals).length){closeMeasMod();return}
+  if(!S.measurements)S.measurements=[];
+  const idx=S.measurements.findIndex(e=>e.date===entry.date);
+  if(idx>=0)Object.assign(S.measurements[idx].vals,entry.vals);else S.measurements.push(entry);
+  save();closeMeasMod();renderBodyPage();
 }
 
-// ---- CHARTS ----
+// CHARTS
 function isDark(){return window.matchMedia('(prefers-color-scheme:dark)').matches}
-function getWeekDates(off){
-  const now=new Date();now.setDate(now.getDate()+off*7);
-  const dow=now.getDay();const mon=new Date(now);mon.setDate(now.getDate()-(dow===0?6:dow-1));
-  const days=[];for(let i=0;i<7;i++){const d=new Date(mon);d.setDate(mon.getDate()+i);days.push(d.toISOString().slice(0,10))}
-  return days;
-}
-
-function drawBarChartWithTarget(cid,vals,target,barColor,lineColor){
+function getWeekDates(off){const now=new Date();now.setDate(now.getDate()+off*7);const dow=now.getDay();const mon=new Date(now);mon.setDate(now.getDate()-(dow===0?6:dow-1));const days=[];for(let i=0;i<7;i++){const d=new Date(mon);d.setDate(mon.getDate()+i);days.push(d.toISOString().slice(0,10))}return days}
+function drawBar(cid,vals,target,barC,tgtC){
   const canvas=document.getElementById(cid);if(!canvas)return;
-  const dpr=window.devicePixelRatio||1;
-  const W=canvas.parentElement.offsetWidth||300,H=150;
+  const dpr=window.devicePixelRatio||1,W=canvas.parentElement.offsetWidth||300,H=150;
   canvas.width=W*dpr;canvas.height=H*dpr;canvas.style.width=W+'px';canvas.style.height=H+'px';
   const ctx=canvas.getContext('2d');ctx.scale(dpr,dpr);
-  const dark=isDark();
-  const gridC=dark?'rgba(255,255,255,0.07)':'rgba(0,0,0,0.06)';
-  const txtC=dark?'#636366':'#aaa';
-  const max=Math.max(...vals,target||1,1);
-  const padL=28,padR=8,padT=10,padB=20;
-  const cW=W-padL-padR,cH=H-padT-padB;
-  const n=vals.length;const bW=cW/n*0.55,gap=cW/n;
+  const dark=isDark(),gC=dark?'rgba(255,255,255,0.07)':'rgba(0,0,0,0.06)',tC=dark?'#636366':'#aaa';
+  const max=Math.max(...vals,target||0,1);
+  const pL=30,pR=10,pT=12,pB=20,cW=W-pL-pR,cH=H-pT-pB,n=vals.length,bW=cW/n*0.55,gap=cW/n;
   ctx.clearRect(0,0,W,H);
-  // grid
-  for(let g=0;g<=4;g++){
-    const y=padT+cH-(g/4)*cH;
-    ctx.strokeStyle=gridC;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(padL,y);ctx.lineTo(W-padR,y);ctx.stroke();
-    ctx.fillStyle=txtC;ctx.font=`10px -apple-system,sans-serif`;ctx.textAlign='right';
-    ctx.fillText(Math.round(max*g/4),padL-3,y+3);
-  }
-  // bars
-  vals.forEach((v,i)=>{
-    const x=padL+i*gap+(gap-bW)/2;
-    const bH=v>0?(v/max)*cH:0;
-    const y=padT+cH-bH;
-    ctx.fillStyle=barColor;ctx.globalAlpha=0.82;
-    if(bH>0){
-      ctx.beginPath();const r=3;
-      ctx.moveTo(x+r,y);ctx.lineTo(x+bW-r,y);ctx.quadraticCurveTo(x+bW,y,x+bW,y+r);
-      ctx.lineTo(x+bW,y+bH);ctx.lineTo(x,y+bH);ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);
-      ctx.closePath();ctx.fill();
-    }
-    ctx.globalAlpha=1;
-    if(v>0){ctx.fillStyle=dark?'#f2f2f7':'#1a1a1a';ctx.font='bold 10px -apple-system,sans-serif';ctx.textAlign='center';ctx.fillText(v,x+bW/2,y-2)}
-  });
-  // target line
-  if(target&&target>0){
-    const ty=padT+cH-(target/max)*cH;
-    ctx.strokeStyle=lineColor;ctx.lineWidth=2;ctx.setLineDash([5,4]);
-    ctx.beginPath();ctx.moveTo(padL,ty);ctx.lineTo(W-padR,ty);ctx.stroke();
-    ctx.setLineDash([]);
-    ctx.fillStyle=lineColor;ctx.font='bold 10px -apple-system,sans-serif';ctx.textAlign='right';
-    ctx.fillText('цель '+target,W-padR,ty-3);
-  }
+  for(let g=0;g<=4;g++){const y=pT+cH-(g/4)*cH;ctx.strokeStyle=gC;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(pL,y);ctx.lineTo(W-pR,y);ctx.stroke();ctx.fillStyle=tC;ctx.font='10px -apple-system,sans-serif';ctx.textAlign='right';ctx.fillText(Math.round(max*g/4),pL-3,y+3)}
+  vals.forEach((v,i)=>{const x=pL+i*gap+(gap-bW)/2,bH=v>0?(v/max)*cH:0,y=pT+cH-bH;ctx.fillStyle=barC;ctx.globalAlpha=.82;if(bH>0){ctx.beginPath();const r=3;ctx.moveTo(x+r,y);ctx.lineTo(x+bW-r,y);ctx.quadraticCurveTo(x+bW,y,x+bW,y+r);ctx.lineTo(x+bW,y+bH);ctx.lineTo(x,y+bH);ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath();ctx.fill()}ctx.globalAlpha=1;if(v>0){ctx.fillStyle=dark?'#f2f2f7':'#1a1a1a';ctx.font='bold 10px -apple-system,sans-serif';ctx.textAlign='center';ctx.fillText(v,x+bW/2,y-2)}});
+  if(target>0){const ty=pT+cH-(target/max)*cH;ctx.strokeStyle=tgtC;ctx.lineWidth=2;ctx.setLineDash([5,4]);ctx.beginPath();ctx.moveTo(pL,ty);ctx.lineTo(W-pR,ty);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle=tgtC;ctx.font='bold 10px -apple-system,sans-serif';ctx.textAlign='right';ctx.fillText('цель '+target,W-pR,ty-3)}
 }
-
-function drawLineChart(cid,vals,color,target){
-  const canvas=document.getElementById(cid);if(!canvas)return;
-  const dpr=window.devicePixelRatio||1;
-  const W=canvas.parentElement.offsetWidth||300,H=150;
+function drawLine(cid,vals,color){
+  const canvas=document.getElementById(cid);if(!canvas||vals.length<2)return;
+  const dpr=window.devicePixelRatio||1,W=canvas.parentElement.offsetWidth||300,H=150;
   canvas.width=W*dpr;canvas.height=H*dpr;canvas.style.width=W+'px';canvas.style.height=H+'px';
   const ctx=canvas.getContext('2d');ctx.scale(dpr,dpr);
-  const dark=isDark();
-  const gridC=dark?'rgba(255,255,255,0.07)':'rgba(0,0,0,0.06)';
-  const txtC=dark?'#636366':'#aaa';
-  const allVals=target?[...vals,target]:vals;
-  const max=Math.max(...allVals,1),min=Math.min(...allVals,0);
-  const range=max-min||1;
-  const padL=32,padR=12,padT=12,padB=20;
-  const cW=W-padL-padR,cH=H-padT-padB;
-  const n=vals.length;
+  const dark=isDark(),gC=dark?'rgba(255,255,255,0.07)':'rgba(0,0,0,0.06)',tC=dark?'#636366':'#aaa';
+  const max=Math.max(...vals),min=Math.min(...vals),range=max-min||0.1,pad=range*0.15;
+  const vMin=min-pad,vMax=max+pad,vR=vMax-vMin;
+  const pL=36,pR=12,pT=14,pB=20,cW=W-pL-pR,cH=H-pT-pB,n=vals.length;
   ctx.clearRect(0,0,W,H);
-  for(let g=0;g<=4;g++){
-    const y=padT+cH-(g/4)*cH;
-    ctx.strokeStyle=gridC;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(padL,y);ctx.lineTo(W-padR,y);ctx.stroke();
-    ctx.fillStyle=txtC;ctx.font='10px -apple-system,sans-serif';ctx.textAlign='right';
-    ctx.fillText((min+range*g/4).toFixed(1),padL-2,y+3);
-  }
-  // target line
-  if(target){
-    const ty=padT+cH-((target-min)/range)*cH;
-    ctx.strokeStyle='#f97316';ctx.lineWidth=1.5;ctx.setLineDash([5,4]);
-    ctx.beginPath();ctx.moveTo(padL,ty);ctx.lineTo(W-padR,ty);ctx.stroke();ctx.setLineDash([]);
-  }
-  // area
-  if(n>1){
-    ctx.beginPath();
-    vals.forEach((v,i)=>{const x=padL+i*(cW/(n-1));const y=padT+cH-((v-min)/range)*cH;i===0?ctx.moveTo(x,y):ctx.lineTo(x,y)});
-    ctx.lineTo(padL+(n-1)*(cW/(n-1)),padT+cH);ctx.lineTo(padL,padT+cH);ctx.closePath();
-    const grad=ctx.createLinearGradient(0,padT,0,padT+cH);
-    grad.addColorStop(0,color+'55');grad.addColorStop(1,color+'05');
-    ctx.fillStyle=grad;ctx.fill();
-  }
-  // line
-  if(n>1){
-    ctx.strokeStyle=color;ctx.lineWidth=2.5;ctx.lineJoin='round';ctx.beginPath();
-    vals.forEach((v,i)=>{const x=padL+i*(cW/(n-1));const y=padT+cH-((v-min)/range)*cH;i===0?ctx.moveTo(x,y):ctx.lineTo(x,y)});
-    ctx.stroke();
-  }
-  // dots + labels
-  vals.forEach((v,i)=>{
-    const x=padL+(n>1?i*(cW/(n-1)):cW/2);
-    const y=padT+cH-((v-min)/range)*cH;
-    ctx.fillStyle=color;ctx.beginPath();ctx.arc(x,y,4,0,Math.PI*2);ctx.fill();
-    ctx.fillStyle=dark?'#f2f2f7':'#1a1a1a';ctx.font='bold 10px -apple-system,sans-serif';ctx.textAlign='center';
-    ctx.fillText(v,x,y-8);
-  });
+  for(let g=0;g<=4;g++){const y=pT+cH-(g/4)*cH;ctx.strokeStyle=gC;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(pL,y);ctx.lineTo(W-pR,y);ctx.stroke();ctx.fillStyle=tC;ctx.font='10px -apple-system,sans-serif';ctx.textAlign='right';ctx.fillText((vMin+vR*g/4).toFixed(1),pL-2,y+3)}
+  const px=i=>pL+i*(cW/(n-1));const py=v=>pT+cH-((v-vMin)/vR)*cH;
+  ctx.beginPath();vals.forEach((v,i)=>i===0?ctx.moveTo(px(i),py(v)):ctx.lineTo(px(i),py(v)));ctx.lineTo(px(n-1),pT+cH);ctx.lineTo(pL,pT+cH);ctx.closePath();
+  const grad=ctx.createLinearGradient(0,pT,0,pT+cH);grad.addColorStop(0,color+'44');grad.addColorStop(1,color+'05');ctx.fillStyle=grad;ctx.fill();
+  ctx.strokeStyle=color;ctx.lineWidth=2.5;ctx.lineJoin='round';ctx.beginPath();vals.forEach((v,i)=>i===0?ctx.moveTo(px(i),py(v)):ctx.lineTo(px(i),py(v)));ctx.stroke();
+  vals.forEach((v,i)=>{ctx.fillStyle=color;ctx.beginPath();ctx.arc(px(i),py(v),4,0,Math.PI*2);ctx.fill();ctx.fillStyle=dark?'#f2f2f7':'#1a1a1a';ctx.font='bold 10px -apple-system,sans-serif';ctx.textAlign='center';ctx.fillText(v,px(i),py(v)-8)});
 }
 
 function renderDash(){
-  const dates=Object.keys(S.sessions);
-  let te=0,tr=0,stats={};
-  dates.forEach(date=>{
-    const se=S.sessions[date];
-    if(se.exercises)se.exercises.forEach(ex=>{
-      te++;tr+=ex.done||0;
-      if(!stats[ex.id]){const def=EX.find(e=>e.id===ex.id)||{name:ex.id,icon:'•'};stats[ex.id]={name:def.name,icon:def.icon,sessions:[]}}
-      stats[ex.id].sessions.push({date,done:ex.done||0,target:ex.target||10});
-    });
-  });
+  const dates=Object.keys(S.sessions);let te=0,tr=0,stats={};
+  dates.forEach(date=>{const se=S.sessions[date];if(se.exercises)se.exercises.forEach(ex=>{te++;tr+=ex.done||0;if(!stats[ex.id]){stats[ex.id]={name:ex.name,icon:ex.icon||'🏋️',sessions:[]}}stats[ex.id].sessions.push({date,done:ex.done||0,target:ex.target||10})})});
   document.getElementById('sumT').textContent=dates.length;
   document.getElementById('sumE').textContent=te;
   document.getElementById('sumR').textContent=tr;
-
-  // steps chart
   const wD=getWeekDates(S.weekOff||0);
-  const mon=new Date(wD[0]),sun=new Date(wD[6]);
-  document.getElementById('wLbl').textContent=mon.toLocaleDateString('ru',{day:'numeric',month:'short'})+' — '+sun.toLocaleDateString('ru',{day:'numeric',month:'short'});
+  const wlbl=new Date(wD[0]).toLocaleDateString('ru',{day:'numeric',month:'short'})+' — '+new Date(wD[6]).toLocaleDateString('ru',{day:'numeric',month:'short'});
+  document.getElementById('wLbl').textContent=wlbl;const wlblB=document.getElementById('wLblB');if(wlblB)wlblB.textContent=wlbl;
   const sVals=wD.map(d=>(S.sessions[d]&&S.sessions[d].steps)||0);
   document.getElementById('sDays').innerHTML=DAYS.map(d=>`<div class="cd">${d}</div>`).join('');
-  setTimeout(()=>drawBarChartWithTarget('stepsChart',sVals,S.stepsGoal||10000,'#22c55e','#f97316'),50);
-
-  // exercise charts
+  setTimeout(()=>drawBar('stepsChart',sVals,S.stepsGoal||10000,'#22c55e','#f97316'),50);
   const ec=document.getElementById('exCharts');ec.innerHTML='';
-  const exColors=['#3b82f6','#f97316','#a855f7','#ec4899','#14b8a6','#f59e0b','#10b981','#ef4444'];
-  let ci=0;
+  const exC=['#3b82f6','#f97316','#a855f7','#ec4899','#14b8a6','#f59e0b','#10b981','#ef4444'];let ci=0;
   Object.keys(stats).forEach(id=>{
     const st=stats[id];
-    const wVals=wD.map(d=>{const se=S.sessions[d];if(!se||!se.exercises)return 0;const f=se.exercises.find(e=>e.id===id);return f?f.done||0:0});
-    const wTgts=wD.map(d=>{const se=S.sessions[d];if(!se||!se.exercises)return 0;const f=se.exercises.find(e=>e.id===id);return f?f.target||0:0});
-    const avgTgt=wTgts.filter(v=>v>0).reduce((a,b)=>a+b,0)/Math.max(1,wTgts.filter(v=>v>0).length)||0;
-    if(wVals.every(v=>v===0)&&avgTgt===0)return;
-    const color=exColors[ci%exColors.length];ci++;
-    const cid='ec_'+id;
+    const wV=wD.map(d=>{const se=S.sessions[d];if(!se||!se.exercises)return 0;const f=se.exercises.find(e=>e.id===id);return f?f.done||0:0});
+    const wT=wD.map(d=>{const se=S.sessions[d];if(!se||!se.exercises)return 0;const f=se.exercises.find(e=>e.id===id);return f?f.target||0:0});
+    const tNZ=wT.filter(v=>v>0);const avgT=tNZ.length?Math.round(tNZ.reduce((a,b)=>a+b,0)/tNZ.length):0;
+    if(wV.every(v=>v===0)&&!avgT)return;
+    const color=exC[ci%exC.length];ci++;const cid='ec_'+id.replace(/[^a-z0-9]/gi,'_');
     const div=document.createElement('div');div.className='chart-card';
     div.innerHTML=`<div class="ct-title"><span>${st.icon}</span>${st.name}</div>
 <div class="legend"><div class="leg-item"><div class="leg-dot" style="background:${color}"></div>Выполнено</div><div class="leg-item"><div class="leg-line" style="background:#f97316"></div>Цель</div></div>
 <div class="cw"><canvas id="${cid}"></canvas></div>
 <div class="cdays">${DAYS.map(d=>`<div class="cd">${d}</div>`).join('')}</div>`;
     ec.appendChild(div);
-    setTimeout(()=>drawBarChartWithTarget(cid,wVals,Math.round(avgTgt),color,'#f97316'),60);
+    setTimeout(()=>drawBar(cid,wV,avgT,color,'#f97316'),60);
+  });
+  if(dashGroup==='body')renderBodyCharts();
+}
+function renderBodyCharts(){
+  const wD=getWeekDates(S.weekOff||0);
+  const wlbl=new Date(wD[0]).toLocaleDateString('ru',{day:'numeric',month:'short'})+' — '+new Date(wD[6]).toLocaleDateString('ru',{day:'numeric',month:'short'});
+  const wlblB=document.getElementById('wLblB');if(wlblB)wlblB.textContent=wlbl;
+  const bc=document.getElementById('bodyCharts');bc.innerHTML='';
+  if(!S.measurements||!S.measurements.length){bc.innerHTML='<div class="empty"><div class="empty-ico">📏</div><p>Нет замеров тела</p></div>';return}
+  MEAS.forEach(m=>{
+    const pts=[...S.measurements].filter(e=>e.vals[m.id]!==undefined).sort((a,b)=>a.date.localeCompare(b.date)).slice(-10);
+    if(pts.length<2)return;
+    const color=MEAS_COLORS[m.id]||'#3b82f6';const cid='bch_'+m.id;
+    const labels=pts.map(e=>new Date(e.date).toLocaleDateString('ru',{day:'numeric',month:'short'}));
+    const vals=pts.map(e=>e.vals[m.id]);
+    const div=document.createElement('div');div.className='chart-card';
+    div.innerHTML=`<div class="ct-title"><span>${m.icon}</span>${m.name}</div><div class="legend"><div class="leg-item"><div class="leg-dot" style="background:${color}"></div>${m.unit}</div></div><div class="cw"><canvas id="${cid}"></canvas></div><div class="cdays">${labels.map(l=>`<div class="cd" style="font-size:9px">${l}</div>`).join('')}</div>`;
+    bc.appendChild(div);
+    setTimeout(()=>drawLine(cid,vals,color),60);
   });
 }
+function shW(d){S.weekOff=(S.weekOff||0)+d;save();renderDash();if(dashGroup==='body')renderBodyCharts()}
 
-function shW(d){S.weekOff=(S.weekOff||0)+d;save();renderDash()}
-
-renderWP();
+renderWP();loadProf();
 </script>
